@@ -1,0 +1,11 @@
+# Story08：冷血總裁的心動時刻
+
+顧北辰被{press|媒體}稱為"沒有心的男人"。他{execute|執行}商業決策時{merciless|無情的}，{cease|停止}合作時毫不{waver|猶豫}，{dismiss|解僱}員工時面無{countenance|表情}。在他的{philosophy|哲學}裡，{pathos|感情}是{weakness|弱點}，{attachment|依戀}是{liability|負擔}。溫以沫是他新聘的{personal|私人}助理。她的{resume|簡歷}{impressive|令人印象深刻}——{graduate|畢業}於常春藤名校，精通三國語言，擁有{exceptional|卓越的}的{organizational|組織}能力。但讓顧北辰真正{observe|注意到}到她的，是她在面試中說的一句話："顧先生，我不怕{difficult|困難的}老闆。我怕的是{mediocre|平庸的}老闆。"
+
+溫以沫很快{adapt|適應}了顧北辰{demanding|苛刻的}的工作{rhythm|節奏}。她能{predict|預判}他的需求，{tackle|處理}問題於{unseen|看不見的}之中，將他的{itinerary|日程}{optimize|優化}到{maximum|最大}效率。但她也有自己的{boundary|底線}。當顧北辰要求她{revoke|取消}週末{altruistic|志願的}活動來加班時，她{politely|禮貌地}但{firmly|堅定地}拒絕了。"那些孤兒院的孩子{depend|依賴}我每週的{visit|探訪}，"她說，"工作可以{postpone|推遲}，但孩子們的{trust|信任}不能{forsake|辜負}。"顧北辰{frown|皺眉}，但沒有{demand|要求}。那天晚上，他{curious|好奇地}查了那家孤兒院的{information|信息}——然後{incognito|匿名地}捐了一百萬。
+
+心動的{indication|徵兆}是{gradual|漸進的}的。顧北辰開始{spot|發現}溫以沫{petty|微不足道的}的{detail|細節}——她{fixate|專注}時會咬下唇，她的{perfume|香水}是淡淡的{jasmine|茉莉}味，她笑起來眼睛會彎成{crescent|月牙}形。更{unsettling|令人不安的}的是，他開始{involuntary|不由自主地}為她改變。他不再在深夜發{urgent|緊急的}郵件打擾她{rest|休息}；他在她{birthday|生日}那天破例提前下班，只為{covertly|暗中}在她桌上放一束{lily|百合花}；他甚至開始{tolerate|容忍}她在辦公室養的那盆{cactus|仙人掌}。"顧總，您最近{mood|心情}似乎不錯，"秘書部的同事{murmur|低語}。顧北辰的臉{darken|沉了下來}。他不{concede|承認}這種{irrational|非理性的}的{shift|變化}。
+
+真正的心動時刻來得{dramatic|戲劇性}。在一次海外{conference|會議}上，顧北辰遭遇了{hostile|敵意的}的商業{sabotage|破壞}——對手{tamper|篡改}了他的{presentation|演示}文件，試圖讓他在{international|國際}投資者面前{humiliate|出醜}。溫以沫在{crucial|關鍵的}時刻{intervene|介入}了。她用{eloquent|雄辯的}的法語{improvise|即興發揮}了一段{dazzling|精彩的}的{speech|演講}，將{disaster|災難}轉化為{triumph|勝利}。全場{acclaim|喝彩}。回酒店的路上，顧北辰沉默了很久。然後他做了一件{unparalleled|史無前例的}事——他停下腳步，轉身面對溫以沫。"今天……謝謝你，"他說。這三個字從他嘴裡說出來，比任何{deed|契約}都{weighty|沉重}。溫以沫{blink|眨了眨眼}，然後{smile|微笑}："這是我的工作。""不，"顧北辰的聲音{soften|柔和了}，"這超出了工作{scope|範圍}。你救了我。"
+
+那天晚上，顧北辰失眠了。他躺在酒店床上，{gawk|凝視}天花板，第一次{face|面對}自己內心的{turmoil|混亂}。他想起溫以沫在{stage|臺上}的樣子——{confident|自信的}、{graceful|優雅的}、{fearless|無畏的}。他想起她每次{defy|挑戰}他時，眼中那種不{submit|屈服}的光芒。他想起她對孤兒院孩子的{tenderness|溫柔}，和她在{strain|壓力}下依然{composed|從容的}的{demeanor|風度}。凌晨三點，他拿起手機，給她發了一條消息："溫以沫，我想我的心……{malfunction|出故障了}。它一直在{hasten|加速}。你知道{remedy|治療方法}嗎？"三分鐘後，回覆來了："顧先生，這種{condition|症狀}，{therapeutic|治療的}上叫'心動'。{cure|治癒方法}只有一個——{admit|承認}。"顧北辰看著屏幕，嘴角{involuntary|不由自主地}上揚。冷血總裁的心，終於{defrost|解凍}了。

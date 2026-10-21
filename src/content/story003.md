@@ -1,0 +1,11 @@
+# Story03：億萬總裁的秘密戀人
+
+沈清歌是A市最{prestigious|有聲望的}的{auction|拍賣}行裡一名{junior|初級的}鑑定師。她的生活{routine|常規的}而{predictable|可預測的}——直到那個{fateful|命運般的}夜晚，她在加班時{stumble|偶然發現}了一幅被{forge|偽造}的名畫，而這幅畫的買家，正是{legendary|傳奇的}的裴氏集團總裁裴司珩。"你確定這是{counterfeit|贗品}？"裴司珩站在她面前，身高一米八八的{figure|身形}帶著{overwhelming|壓倒性的}的{presence|氣場}。他的五官{sculpt|雕刻}般{flawless|完美的}，眼神卻冷得像{arctic|北極的}冰川。沈清歌{swallow|吞嚥}了一下，但沒有{retreat|退縮}。"{bindicate|鑑定}結果不會說謊，裴先生。這幅畫的{pigment|顏料}成分與十八世紀的{original|原作}存在{significant|顯著的}差異。"裴司珩{narrow|眯起}了眼睛。這個{petite|嬌小的}的女人，竟敢{challenge|挑戰}他花兩千萬買下的藏品。
+
+事情的{aftermath|後果}出乎所有人{expectation|預料}。裴司珩沒有{retaliate|報復}，反而{commission|委託}沈清歌成為他私人收藏的{exclusive|專屬}鑑定顧問。這個{proposal|提議}讓整個拍賣行都{astonish|震驚}了。"我{value|看重}的是{competence|能力}，不是{flattery|奉承}，"裴司珩在簽約時說，"你是第一個敢對我說'不'的人。這種{integrity|正直}，在我的世界裡極為{scarce|稀缺的}。"於是，沈清歌開始{frequent|頻繁出入}裴司珩的私人{gallery|畫廊}。那裡收藏著{countless|無數的}珍品，每一件都{reflect|反映}著這個男人{sophisticated|精緻的}的品味和{solitary|孤獨的}的靈魂。
+
+他們之間的關係{evolve|演變}得{nuanced|微妙的}而{inevitable|不可避免}。裴司珩會在她{concentrate|專注}鑑定時，默默為她續上一杯{fragrant|芬芳的}的茶；她會在他{exhaust|疲憊}於商務談判後，用一段藝術史的{anecdote|軼事}讓他{relax|放鬆}。但裴司珩{insist|堅持}，他們的關係必須{remain|保持}絕對{clandestine|秘密的}。"我的世界太{dangerous|危險的}，"他說，眼中閃過一絲{pain|痛苦}，"我不想讓你成為別人{target|攻擊}的{susceptible|脆弱的}目標。"沈清歌{understand|理解}他的{concern|顧慮}，但秘密戀情的{pressure|壓力}像一塊{invisible|看不見的}的巨石，{progressively|逐漸地}壓在她心頭。她無法向{colleague|同事}解釋為何頻繁外出，無法在{communal|社交的}場合{acknowledge|承認}他們的關係。
+
+危機在一次{gala|慈善晚會}晚宴上{ignite|爆發}。裴司珩的{ex-fiancée|前未婚妻}——{glamorous|迷人的}的財閥千金許若琳{appear|出現}了，她{cling|緊貼}著裴司珩的手臂，當眾{announce|宣佈}他們即將{reunite|複合}。沈清歌站在人群中，臉色{pale|蒼白}。她看到裴司珩的眼神在人海中{search|搜尋}她，但她已經轉身{vanish|消失}在了夜色裡。接下來的一周，她{refuse|拒絕}接聽所有電話，{immerse|沉浸}在工作中試圖{numb|麻痺}自己。裴司珩發來無數條消息，每一條都在{explain|解釋}和{plead|懇求}，但她一條也沒有打開。
+
+直到第八天，裴司珩做了一件{unprecedented|史無前例的}的事——他在A市最大的{commercial|商業}廣場的LED屏幕上，播放了一段視頻。視頻裡，他站在自己的畫廊中，身後是他{secretly|秘密地}為沈清歌畫的數十幅{portrait|肖像}。"沈清歌，"他的聲音通過{broadcast|廣播}傳遍整個廣場，"我曾經以為{veil|遮掩}是保護，現在我{discern|領悟}，{cloak|掩蓋}只是{cowardice|懦弱}。你是我生命中最{precious|珍貴的}的{masterpiece|傑作}，我不願再把你藏在暗處。"沈清歌站在廣場上，淚水{stream|流淌}過臉頰。身邊的路人紛紛{applaud|鼓掌}。裴司珩從人群中走來，單膝跪地，手中捧著一枚{diamond|鑽石}戒指。"從今以後，不再是秘密戀人，而是我{legitimate|合法的}的、{permanent|永久的}的愛人。"沈清歌笑著點頭，{clasp|緊握}了這個終於學會{brave|勇敢}的男人。城市的霓虹燈{sparkle|閃耀}，見證了這段從秘密走向{daylight|光明}的愛情。

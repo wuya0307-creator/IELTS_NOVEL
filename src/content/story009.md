@@ -1,0 +1,11 @@
+# Story09：霸道總裁的逃跑嬌妻
+
+凌薇三年前嫁給了蕭靳寒——A市最{formidable|令人敬畏的}的{magnate|巨頭}。這段婚姻從一開始就是一場{unequal|不平等的}的{alliance|聯姻}：凌家需要蕭氏的{capital|資金}，蕭靳寒需要一個{obedient|聽話的}妻子來{appease|安撫}他{conservative|保守的}的家族。三年裡，凌薇{diligent|勤勉地}扮演著完美妻子的角色——{attend|出席}每一場{banquet|宴會}，{oversee|打理}偌大的蕭家{estate|莊園}，{bear|承受}婆婆的{stringent|苛刻的}挑剔。而蕭靳寒，始終對她{aloof|冷淡的}，彷彿她只是一件{decorative|裝飾性的}的{furniture|傢俱}。直到那天，她在他的書房{overhear|無意中聽到}他對律師說："{draft|起草}離婚{treaty|協定}吧。她的{utility|利用價值}已經{deplete|耗盡}了。"凌薇的心像被{shatter|擊碎}了。她沒有哭，沒有{argue|爭吵}。她只是回到房間，{pack|收拾}了一個小{suitcase|行李箱}，趁夜色{escape|逃離}了蕭家。
+
+凌薇{disappear|消失}了。她用{savings|積蓄}買了一張去南方小城的{ticket|車票}，{rent|租}了一間{tiny|小小的}公寓，在一家{bakery|麵包店}找到了工作。她{dye|染}了頭髮，換了{style|風格}，{delete|刪除}了所有{interpersonal|人際的}賬號。她以為自己可以{start|開始}新生活。但她沒有{reckon|預料到}，蕭靳寒會{react|反應}得如此{violent|激烈}。當他發現凌薇不見了，這個向來{unruffled|沉著的}的男人第一次{lose|失去}了{control|控制}。他{overturn|掀翻}了書桌，{smash|砸碎}了花瓶，然後{rally|動員}了整個{security|安保}團隊去{hunt|搜尋}她。"找到她，"他的聲音{perilous|危險地}低沉，"不惜一切{cost|代價}。"
+
+兩個月後，蕭靳寒{trace|追蹤}到了那座南方小城。當他推開麵包店的門，看到凌薇穿著{apron|圍裙}、臉上沾著麵粉、笑著給{customer|顧客}遞麵包時，他{petrify|僵住}了。她看起來……{joyful|快樂的}。比在蕭家三年裡任何時候都{blissful|幸福的}。這個{realization|認知}像一把刀{gouge|刺入}進他的胸口。"凌薇，"他走進去，聲音{gravelly|粗啞的}。她的笑容{solidify|凝固}了。然後她{collect|使鎮靜}自己，{impassive|冷靜地}說："蕭先生，離婚{settlement|協議}我已經簽好了，放在你書桌第二個{drawer|抽屜}裡。""我沒有要離婚，"蕭靳寒{blurt|脫口而出}。"我聽到了你和律師的{conversation|對話}。"蕭靳寒{close|閉上}了眼睛。"那通電話……是關於我{cousin|堂兄}的離婚案。不是我們的。"
+
+凌薇{stun|愣住}了。但三年的{overlook|忽視}和{coldness|冷漠}不是一句{misunderstanding|誤會}就能{erase|抹去}的。"就算是誤會，"她的聲音{shiver|哆嗦}，"你對我的{attitude|態度}也說明了一切。在你眼裡，我從來都不{important|重要}。"蕭靳寒沉默了。他知道她說的是{truth|事實}。他一直把她的{existence|存在}視為{granted|理所當然}，從未{express|表達}過任何{appreciation|感激}。"給我一個{chance|機會}，"他說，這是他人生中第一次{beg|懇求}，"讓我{prove|證明}，你對我來說有多{essential|不可或缺}。"凌薇看著他——這個曾經{invincible|不可戰勝的}的男人，此刻站在她的小麵包店裡，眼眶{crimson|通紅的}，{ego|自尊}碎了一地。"一個月，"她最終說，"你有一個月的{probation|考驗期}。"
+
+接下來的一個月，蕭靳寒做了所有人都{unimaginable|難以想象}的事。他{relocate|搬}到了小城，住在麵包店對面的{motel|旅館}裡。他每天早上五點起來幫她{knead|揉}麵糰，學會了{bake|烘焙}，甚至{recall|記住}了每個{regular|常客}的{taste|喜好}。他不再{command|命令}，而是{ask|詢問}；不再{suppose|假設}，而是{listen|傾聽}；不再{disregard|忽視}，而是{cherish|珍惜}。一個月的最後一天，蕭靳寒在麵包店打烊後，拿出一個{plain|樸素的}的紙盒。裡面是一個他親手做的{croissant|牛角麵包}——形狀{clumsy|笨拙的}，但上面用{chocolate|巧克力}寫著："回家吧。"凌薇看著那個醜醜的麵包，笑著哭了。"蕭靳寒，你知道嗎，"她{wipe|擦去}眼淚，"這是你三年來送我的第一件{gift|禮物}。""以後，"他將她拉入懷中，聲音{resolute|堅定的}，"每一天都會有。"逃跑的嬌妻回來了——不是因為{responsibility|責任}，而是因為這個曾經{glacial|冰冷的}的男人，終於學會了{love|愛}。

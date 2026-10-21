@@ -1,0 +1,9 @@
+# Story93：總裁的手工皮具
+
+季霆琛的{wallet|錢包}{break|壞了}。不是{ordinary|普通}{wallet|錢包}——是他父親留下的{handmade|手工}{leather|皮革}{wallet|錢包}，用了三十年。他找遍了{luxury|奢侈品}{brand|品牌}的{repair|維修}服務，沒有人能修——因為這不是{brand|品牌}貨，是{handcraft|手工藝品}。{leather|皮具}{craftsman|匠人}沈若溪在{old town|老城區}有一間{tiny|小小的}{workshop|工坊}。她{examine|檢查}了{wallet|錢包}後說："{stitch|針腳}是{saddle stitch|馬鞍針法}，{leather|皮革}是{vegetable-tanned|植鞣}。做這個的人是{master|大師}。""是我父親，"季霆琛說，"他是{cobbler|鞋匠}。""你父親是{cobbler|鞋匠}，你是{CEO|總裁}？""他{work|工作}了一輩子，讓我{study|讀書}。"
+
+沈若溪{agree|同意}{repair|修復}。她需要找到{match|匹配的}{leather|皮革}和{thread|線}——這種{vintage|老式的}{material|材料}已經很{rare|稀有}了。季霆琛每天來{workshop|工坊}看{progress|進度}。他{fascinate|著迷}於沈若溪的{craft|手藝}——她用{awl|錐子}{punch|打孔}，用{needle|針}{stitch|縫合}，每一個{movement|動作}都{precise|精準}。"你為什麼不用{machine|機器}？"他問。"{machine|機器}做的{stitch|針腳}是{chain stitch|鏈式針法}，斷一根{thread|線}全部{unravel|散開}，"她說，"{hand|手工}{stitch|縫的}是{independent|獨立的}，斷一根其他不{affect|影響}。""像{relationship|關係}，"他說，"{independent|獨立的}比{dependent|依賴的}更{durable|持久}。"沈若溪{look|看了他一眼}。"你{understand|懂}{leather|皮具}。""我{understand|懂}我父親。"
+
+{wallet|錢包}修好了。{new|新的}{leather|皮革}和{old|舊的}{leather|皮革}{blend|融合}在一起，{stitch|針腳}{neat|整齊}而{strong|牢固}。季霆琛{hold|拿著}{wallet|錢包}，{thumb|拇指}{trace|撫過}{stitch|針腳}。"和父親的{stitch|針腳}一樣。""我{study|研究}了他的{technique|技法}，"沈若溪說，"你父親是真正的{craftsman|匠人}。"季霆琛{pay|付}了{repair|修理}費——沈若溪只收了{material|材料}費。"你的{labor|手工}不要錢？""這是{craftsman|匠人}對{craftsman|匠人}的{respect|尊重}，"她說。
+
+季霆琛開始{learn|學}{leatherwork|皮具製作}。沈若溪教他{cut|裁剪}、{stitch|縫合}、{burnish|打磨}。他的第一個作品是一個{keychain|鑰匙扣}——{rough|粗糙}，但{solid|結實}。"送給你，"他說。沈若溪{accept|收下}了。她把它掛在{workshop|工坊}的{key|鑰匙}上。"你知道嗎，"她說，"{leather|皮革}越用越{beautiful|美}。{scratch|劃痕}和{wear|磨損}都是{patina|包漿}——{time|時間}的{gift|禮物}。""像人一樣，"季霆琛說，"{scar|傷疤}和{wrinkle|皺紋}都是{story|故事}。"沈若溪{smile|笑了}。"你越來越像{craftsman|匠人}了。""因為我有個好{teacher|老師}，"他說，"而且我想做一件{lifetime|一輩子的}作品。""什麼？""和你一起{build|打造}的{life|人生}。"

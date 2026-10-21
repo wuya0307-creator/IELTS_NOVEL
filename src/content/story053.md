@@ -1,0 +1,9 @@
+# Story53：總裁的流星許願
+
+凌霄是{aerospace|航空航天}集團的{founder|創始人}。他的{ambition|野心}是{launch|發射}中國第一顆{commercial|商業}{satellite|衛星}。為此他{sacrifice|犧牲}了一切——{health|健康}、{social|社交}生活、甚至{sleep|睡眠}。{astrophysicist|天體物理學家}許星河是他的{chief|首席}{scientist|科學家}。她{brilliant|才華橫溢}、{stubborn|固執}，而且完全不把凌霄當{boss|老闆}。"你的{timeline|時間表}不{realistic|現實}，"她在{meeting|會議}上直接說，"{rush|趕工}會導致{catastrophic|災難性的}{failure|失敗}。""我們的{competitor|競爭對手}不會等我們，"凌霄說。"那就讓他們先{fail|失敗}，"許星河{retort|反駁}，"{space|太空}不{forgive|原諒}{shortcut|捷徑}。"
+
+他們{clash|衝突}不斷。凌霄要{speed|速度}，許星河要{precision|精確}。每次{debate|辯論}都像{war|戰爭}。但凌霄{notice|注意到}，許星河每天{midnight|午夜}還在{laboratory|實驗室}。她的{dedication|奉獻}不亞於他。一天凌晨，他給她送{coffee|咖啡}。許星河{surprise|驚訝}地抬頭。"你不{sleep|睡覺}嗎？""你不也沒{sleep|睡}？"她{accept|接過}咖啡，{sip|抿了一口}。"{launch|發射}{window|窗口}的{calculation|計算}有個{variable|變量}我還沒{solve|解決}。"凌霄坐下來。"給我看看。"那是他們第一次不{argue|爭吵}的夜晚。
+
+{launch|發射}前一週，{critical|關鍵}{component|部件}出了問題。{supplier|供應商}{delay|延遲}交貨，{backup|備用}方案也{fail|失敗}了。{investor|投資人}開始{panic|恐慌}。凌霄在{conference|會議}室裡{pace|踱步}。許星河走進來，把一份{document|文件}放在桌上。"我找到了{alternative|替代}{solution|方案}，"她說，"用{domestic|國產}{component|部件}替代，{performance|性能}差{slightly|略微}，但{reliability|可靠性}更高。"凌霄看完方案，{exhale|長出一口氣}。"你什麼時候做的？""你{pace|踱步}的時候，"她{deadpan|面無表情地}說。他第一次對她{genuine|真心地}{smile|笑了}。
+
+{launch|發射}當天，{countdown|倒計時}開始。凌霄和許星河並肩站在{control|控制}室裡。"十、九、八……"許星河的手在{tremble|發抖}。凌霄{reach|伸手}握住了她的手。她沒有{pull|抽}回去。"{ignition|點火}！"{rocket|火箭}拔地而起，{flame|火焰}照亮了{night sky|夜空}。{satellite|衛星}成功進入{orbit|軌道}。控制室{erupt|爆發}出{cheer|歡呼}。凌霄轉向許星河。她的眼裡{reflect|倒映}著{rocket|火箭}的{trail|尾跡}，像{meteor|流星}。"許星河，"他說，"你相信{meteor|流星}許願嗎？""我是{scientist|科學家}，"她說，"我相信{data|數據}。""那我給你一個數據：我{observe|觀察}你三百六十五天，{conclude|得出結論}——我{love|愛}你的{probability|概率}是百分之百。"許星河{blush|臉紅了}。"這不{scientific|科學}。{sample|樣本}量太小。""那給我一輩子{enlarge|擴大}{sample|樣本}量。"{night sky|夜空}中，{satellite|衛星}劃過{orbit|軌道}，像一顆永不{fade|消逝}的{meteor|流星}。

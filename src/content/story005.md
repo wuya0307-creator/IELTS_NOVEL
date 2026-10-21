@@ -1,0 +1,11 @@
+# Story05：冰山總裁的契約愛情
+
+程念之收到那份{proposition|提案}時，正坐在{cramped|狹小的}的出租屋裡吃泡面。信封上印著"陸氏{corporation|集團}"的燙金標誌，裡面是一份措辭{formal|正式的}到{preposterous|荒謬的}程度的"婚姻{cooperation|合作}{agreement|協議}"。{clause|條款}寫得清清楚楚：甲方陸衍舟，乙方程念之。婚姻{duration|期限}兩年。甲方{furnish|提供}住房、生活費及乙方母親全部{medical|醫療}費用；乙方{commitment|義務}為在{public|公開}場合扮演稱職妻子。{violate|違反}任何條款，{penalty|罰金}五百萬。程念之的母親正在{intensive|重症}監護室裡與{cancer|癌症}抗爭，{surgery|手術}費用像一座{insurmountable|不可逾越的}的大山。她沒有{extravagance|奢侈}去{decline|拒絕}。
+
+陸衍舟是商界公認的"冰山"。他的{expression|表情}永遠{blank|空白的}，說話{concise|簡潔的}到近乎{rude|無禮的}，對{feeling|感受}的{display|展示}幾乎為零。{rumor|傳言}說他患有{acute|嚴重的}的{emotional|情感}{disorder|障礙}，無法{perceive|感知}愛與被愛。婚後第一天，程念之試圖和他{communicate|溝通}。"陸先生，早餐你{prefer|偏好}中式還是西式？""{irrelevant|無關緊要的}，"他頭也不抬，繼續看{financial|財務}報表。程念之深呼吸。好吧，{accord|協定}上沒寫要{cultivate|培養}感情，她只需要{endure|忍耐}兩年。
+
+但程念之天生是個{optimistic|樂觀的}的人，她的{geniality|溫暖}像陽光一樣{persistent|持續的}。她會在他書桌上放一杯{precise|精確}溫度的咖啡；會在他{overtime|加班}時在客廳留一盞燈；會在他{rare|罕見地}回家吃飯時，做出{meticulous|精心的}的菜餚。陸衍舟起初{ignore|忽視}這一切。但{incrementally|漸進地}，他發現自己開始{notice|注意}——注意她{hum|哼唱}歌時的樣子，注意她讀書時{wrinkle|皺起}鼻子的{quirk|習慣}，注意她離開後房間裡{hover|縈繞}的淡淡{fragrance|香氣}。這些{trivial|瑣碎的}的細節，像{fissure|裂縫}一樣{permeate|滲透}進他{frozen|冰封的}的內心。
+
+第四個月，程念之的母親{surgery|手術}成功了。她在醫院走廊裡{sob|啜泣}，{release|釋放}了積壓已久的{tension|緊張}。陸衍舟不知何時出現在她身後，{awkward|笨拙地}遞過一包紙巾。"你母親的{recovery|康復}數據很{positive|積極的}，"他說，語氣依然{flat|平淡的}，但程念之{detect|察覺}到了一絲不易{perceive|察覺}的{solicitude|關心}。"謝謝你，"她抬頭看他，眼眶{red|紅紅的}，笑容卻{bright|明亮的}，"真的謝謝你。"陸衍舟的喉結{bob|上下動了一下}。他{brusque|突然的}轉身離開，但走出幾步後又停下："……不用謝。這在{compact|合約}範圍內。"程念之望著他的背影，第一次覺得這座冰山，也許並非{impenetrable|不可穿透的}。
+
+真正的{breakthrough|突破}發生在一個暴風雨的夜晚。程念之被困在公司，手機沒電，{panic|恐慌}在黑暗中{surge|湧起}——她從小就{terrify|害怕}雷電。當陸衍舟{drench|渾身溼透地}出現在她面前時，她幾乎不敢相信自己的眼睛。他的{immaculate|一塵不染的}西裝被雨水{soak|浸透}，頭髮{dishevel|凌亂地}貼在額頭上，但他的眼神——那雙永遠{cold|冰冷的}的眼睛裡，此刻燃燒著一種她從未見過的{fervent|熾烈的}光芒。"你沒有接電話，"他的聲音{raspy|沙啞的}，"我{presume|以為}……"他沒有說完，只是{stride|大步走}過來，將她{wrap|裹}進懷裡。那是他們之間第一次{physical|身體的}接觸。程念之能感受到他{rapid|急促的}的心跳，和他身上雨水與{cedar|雪松}混合的氣息。"陸衍舟，"她輕聲說，"你在{worry|擔心}我？"他沉默了很久，最終低聲說："我不{apprehend|理解}這種感覺。但當我聯繫不上你時，我的{chest|胸口}……很{painful|疼}。"程念之笑了，淚水和雨水混在一起。冰山在{melt|融化}，而她知道，這份{bond|合同}上沒有寫的東西，才是最{valuable|珍貴的}的。兩年期滿那天，陸衍舟沒有提{terminate|終止}。他只是將一份新的文件推到她面前——那是一份{everlasting|永久的}的結婚{certificate|證書}申請。"這次，"他的嘴角{twitch|微微抽動}出一個生澀的微笑，"沒有{clause|條款}，沒有{penalty|罰金}。只有……我。可以嗎？"程念之撲進他懷裡。窗外，冰雪{thaw|消融}，春天來了。

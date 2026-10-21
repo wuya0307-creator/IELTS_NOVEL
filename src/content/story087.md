@@ -1,0 +1,9 @@
+# Story87：總裁的急診室
+
+蕭景琛{faint|暈倒}在{office|辦公室}裡。{ambulance|救護車}把他送到了最近的{hospital|醫院}——不是他{usual|通常}去的{private|私立}醫院，是{public|公立}{hospital|醫院}的{emergency room|急診室}。{emergency|急診}{doctor|醫生}沈泥{check|檢查}了他。"{exhaustion|過度疲勞}、{dehydration|脫水}、{gastric|胃}{ulcer|潰瘍}。你多久沒{eat|吃飯}了？""……兩天。""兩天？"她{incredulous|難以置信地}看著他，"你是{human|人}不是{machine|機器}。""我有{important|重要的}{deal|交易}——""你的{stomach|胃}不{care|在乎}你的{deal|交易}，"她{hook|掛上}了{IV drip|點滴}，"{lie down|躺好}。"
+
+蕭景琛不是好{patient|病人}。他在{bed|病床}上{answer|接}{phone|電話}、{send|發}{email|郵件}、{yell|吼}{subordinate|下屬}。沈泥{confiscate|沒收}了他的{phone|手機}。"{rest|休息}。""你不能{confiscate|沒收}我的{phone|手機}！""在{emergency room|急診室}裡，我是{authority|權威}，"她說，"你的{money|錢}和{power|權力}在這裡不{work|管用}。"蕭景琛{glare|瞪}了她三秒。然後他{close|閉上}了眼睛——因為他確實{exhausted|累極了}。
+
+他醒來時，{emergency room|急診室}的{chaos|混亂}還在繼續。沈泥在{treat|治療}一個{car accident|車禍}{victim|傷者}，{blood|血}濺在她的{white coat|白大褂}上。蕭景琛{watch|看著}她——{swift|迅速}、{decisive|果斷}、{calm|冷靜}。她在{life and death|生死}之間{navigate|穿梭}，像他在{boardroom|會議室}裡{navigate|穿梭}一樣{natural|自然}。{patient|傷者}{stabilize|穩定}後，沈泥{lean|靠}在{wall|牆上}，{close|閉上}眼睛{breathe|喘了口氣}。"你還好嗎？"蕭景琛問。她{open|睜開}眼睛，{surprise|驚訝}他還醒著。"我{fine|沒事}。你呢？{hungry|餓}嗎？""……餓。"她從{pocket|口袋}裡掏出一個{granola bar|能量棒}。"{emergency|急診}{doctor|醫生}的{survival|生存}{kit|工具}。"
+
+蕭景琛{discharge|出院}時，沈泥給了他一張{diet|飲食}{plan|計劃}和一張{prescription|處方}。"按時{eat|吃飯}，按時{sleep|睡覺}，"她說，"否則下次{faint|暈倒}可能不只是{ulcer|潰瘍}。""你對所有{patient|病人}都這麼{fierce|兇}嗎？""只對不{listen|聽話}的。"他{laugh|笑了}。"沈醫生，如果我{follow|遵守}你的{diet plan|飲食計劃}，你願意{monitor|監督}我嗎？""我是{emergency|急診}{doctor|醫生}，不是{nutritionist|營養師}。""那當我的{dinner|晚餐}{companion|夥伴}？{monitor|監督}我{eat|吃飯}。"沈泥{stare|看著}他。"你在{emergency room|急診室}裡{flirt|搭訕}？""我在{seek|尋求}{medical|醫療}{advice|建議}，"他{innocent|無辜地}說。沈泥{shake|搖了搖}頭，但她{write|寫下}了自己的{phone number|電話號碼}。"只限{medical|醫療}{consultation|諮詢}。""當然，"他說。但他們都知道，這不只是{medical|醫療}的事。

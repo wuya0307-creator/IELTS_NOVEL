@@ -125,9 +125,10 @@ ex = {}
 for l in EX.splitlines():
     w, p, s = l.split('|'); ex[w] = (p, s.split(','))
 
-words, chapters = {}, []
-for i, f in enumerate(sorted(glob.glob(os.path.join(HERE, 'content', '*.md'))), 1):
-    raw = open(f, encoding='utf-8').read().strip().split('\n')
+words, novels = {}, []
+for f in sorted(glob.glob(os.path.join(HERE, 'content', 'story*.md'))):
+    num = int(re.search(r'story(\d+)', os.path.basename(f)).group(1))
+    raw = open(f, encoding='utf-8').read().strip().splitlines()
     title = raw[0].lstrip('# ').strip()
     paras, vocab = [], []
     for para in [x for x in raw[1:] if x.strip()]:
@@ -137,16 +138,21 @@ for i, f in enumerate(sorted(glob.glob(os.path.join(HERE, 'content', '*.md'))), 
             en, zh = m.group(1), m.group(2)
             segs.append({'t': 'word', 'id': en, 'zh': zh})
             if en not in words:
-                p, syn = ex.get(en, ('', []))
-                words[en] = {'id': en, 'zh': zh, 'pos': p, 'syn': syn}
+                p, syn = ex.get(en.lower(), ('', []))
+                words[en] = {'id': en, 'zh': zh, 'zhs': [zh], 'pos': p, 'syn': syn}
+            elif zh not in words[en]['zhs']:
+                words[en]['zhs'].append(zh); words[en]['zh'] = '；'.join(words[en]['zhs'])
             if en not in vocab: vocab.append(en)
             pos = m.end()
         if pos < len(para): segs.append({'t': 'text', 'v': para[pos:]})
         paras.append(segs)
-    chapters.append({'id': 'n1c%d' % i, 'index': i, 'title': title, 'paras': paras, 'vocab': vocab})
-data = {'novels': [{'id': 'n1', 'title': '冷峻總裁的限時婚約', 'desc': '一紙一年婚約，從交易走向真愛。邊讀劇情，邊記住雅思單字。', 'chapters': chapters}], 'words': words}
-open(os.path.join(HERE, 'data.js'), 'w', encoding='utf-8').write('window.DATA=' + json.dumps(data, ensure_ascii=False) + ';')
-print(len(words), 'words', len(chapters), 'chapters')
+    name = title.split('：', 1)[-1]
+    novels.append({'id': 'n%d' % num, 'num': num, 'title': name, 'desc': '%d 個雅思單字' % len(vocab),
+                   'chapters': [{'id': 'n%dc1' % num, 'index': 1, 'title': title, 'paras': paras, 'vocab': vocab}]})
+novels.sort(key=lambda n: n['num'])
+data = {'novels': novels, 'words': words}
+open(os.path.join(HERE, 'data.js'), 'w', encoding='utf-8').write('window.DATA=' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + ';')
+print(len(words), 'words', len(novels), 'novels')
 
 # 單檔版：把資料內嵌進 index.html，輸出 dist/index.html（一個檔案即可部署/傳送）
 html = open(os.path.join(HERE, 'index.html'), encoding='utf-8').read()

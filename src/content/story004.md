@@ -1,0 +1,11 @@
+# Story04：傲慢總裁的溫柔陷阱
+
+江晚寧第一次見到霍靳深，是在{metropolitan|大都市的}醫院的急診室。她是剛入職的{resident|住院}醫生，而他——霍氏{pharmaceutical|製藥}集團的{heir|繼承人}——因為{allergic|過敏的}反應被緊急送來。"我不需要一個{novice|新手}來{treat|治療}我，"霍靳深即使躺在病床上，語氣依然{condescending|居高臨下的}，"叫你們{senior|資深的}醫生來。"江晚寧{clench|攥緊}了拳頭，但{professional|專業的}素養讓她{restrain|剋制}住了怒火。"霍先生，您的{symptom|症狀}需要{immediate|立即的}處理。如果您{persist|堅持}等待，{swelling|腫脹}可能{deteriorate|惡化}到{critical|危急的}程度。"霍靳深{stare|凝視}了她三秒，最終{reluctant|不情願地}伸出了手臂。
+
+那次{incident|事件}之後，霍靳深開始{patronize|頻繁造訪}出現在江晚寧的生活中。他以{donate|捐贈}醫療設備為由，{inspect|視察}醫院；他在她{commute|通勤}的路上"{coincidentally|巧合地}"出現；他甚至{sponsor|贊助}了她正在{conduct|進行}的{clinical|臨床}研究項目。"你到底想要什麼？"江晚寧終於{confront|質問}他。霍靳深{lean|倚靠}在他那輛{sleek|光滑的}跑車上，嘴角{curve|彎起}出一個{enigmatic|神秘的}的弧度。"我在{invest|投資}，江醫生。你是我見過最有{potential|潛力}的……{asset|資產}。""我不是任何人的{asset|資產}，"江晚寧{retort|反駁}，轉身就走。但她沒有看到，霍靳深望著她背影時，眼中那抹{bona fide|真正的}的{admiration|欽佩}。
+
+霍靳深的"{pursuit|追求}"{escalate|升級}了。他不再用{material|物質的}手段，而是開始{demonstrate|展現}一種出人意料的{patience|耐心}。他會在她值夜班時送來{nutritious|營養的}的晚餐；他會{memorize|記住}她{mention|提到}過的每一本書，然後{casually|不經意地}聊起相關話題；他甚至學會了{basic|基本的}的急救知識，只為能和她有更多{common|共同的}話題。江晚寧的{defense|防線}開始{crack|裂開}。她發現，在那副{haughty|傲慢的}面具之下，霍靳深其實是一個{lonely|孤獨的}的人。他的母親在他{adolescent|青少年}時期因{chronic|慢性的}疾病去世，父親{remarry|再婚}後對他{neglect|忽視}。他用{hubris|傲慢}作為{shield|盾牌}，將所有人{exclude|排斥}在外。
+
+轉折點來得{abrupt|突然}。一場{epidemic|疫情}席捲了城市，江晚寧{volunteer|自願}前往{frontline|前線}。霍靳深得知後，第一次失去了他標誌性的{composure|鎮定}。"你瘋了嗎？"他在電話裡{roar|咆哮}，"那裡的{infection|感染}率極高，{mortality|死亡率}數據還在{climb|攀升}——""這是我的{duty|職責}，"江晚寧的聲音{firm|堅定}而{serene|平靜的}，"就像你{manage|管理}你的{enterprise|企業}一樣，我也要{discharge|履行}我的{oath|誓言}。"電話那頭沉默了很久。然後霍靳深說了一句讓她{stunned|震驚的}的話："那我和你一起去。霍氏{pharmaceutical|製藥}可以{provide|提供}所有{necessary|必要的}的藥物和{equipment|設備}。"
+
+在{frontline|前線}的日子裡，霍靳深放下了所有的{pride|驕傲}。他搬運{supply|物資}，{coordinate|協調}後勤，甚至學會了給{patient|病人}喂藥。江晚寧看著這個曾經{pamper|嬌慣}的富家公子，在{harsh|艱苦的}環境中{metamorphose|蛻變}，心中湧起一種無法{describe|描述}的{sentiment|情感}。疫情{subside|消退}後的那個黃昏，霍靳深站在醫院天台上，夕陽將他的{silhouette|輪廓}鍍上金色。"江晚寧，"他轉過身，眼中沒有了{arrogance|傲慢}，只有{humble|謙卑的}和{earnest|真誠的}，"我知道我曾經很{obnoxious|討厭的}。但你讓我{grasp|領悟}了，真正的{strength|力量}不是{dominate|支配}別人，而是{protect|保護}你愛的人。"江晚寧走向他，{tiptoe|踮起腳尖}，在他額頭上落下一個輕輕的吻。"傲慢總裁先生，你的溫柔陷阱……我{willingly|心甘情願地}掉進去了。"霍靳深笑了——那是她第一次見到他如此{luminous|光彩照人的}的笑容。

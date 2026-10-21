@@ -66,6 +66,10 @@ body.wb-open #wb{display:flex}
 @media(max-width:899px){#wb{left:0;right:0;bottom:0;height:46vh;border-width:1px 0 0}body.wb-open #app{padding-bottom:calc(46vh + 20px)}}
 .w.sw2{box-shadow:0 0 0 2px var(--acc);background:var(--accbg)}
 .read p.speak{background:var(--accbg);border-radius:8px;box-shadow:0 0 0 6px var(--accbg)}
+.ngrid{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.nv{display:flex;gap:12px;align-items:center;cursor:pointer;margin:0}.nv:hover{border-color:var(--acc)}
+.nn{font-size:20px;font-weight:700;color:var(--acct);min-width:2em;text-align:center}
+.search{width:100%;font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 10px}
 select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:5px}
 </style>
 </head>
@@ -140,7 +144,7 @@ async function pull() {
   } catch (e) { mark('err'); }
 }
 document.addEventListener('visibilitychange', () => { if (document.hidden) push(); else pull(); });
-function pickUser(n) { PROF = n; S = loadLocal(n); view = 'home'; cur = {ch: 0, mode: 'read', shuffle: []}; rv = null; render(); pull(); }
+function pickUser(n) { PROF = n; S = loadLocal(n); view = 'home'; cur = {novel: 0, ch: 0, mode: 'read', shuffle: []}; rv = null; render(); pull(); }
 function switchUser() { push(); PROF = null; render(); }
 function addUser() {
   const n = (prompt('新使用者名稱（例如 HCW）') || '').trim().slice(0, 20); if (!n) return;
@@ -193,9 +197,11 @@ function dueText(w) {
 /* ---------- 發音 ---------- */
 function say(t) { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = S.set.accent === 'UK' ? 'en-GB' : 'en-US'; u.rate = .9; speechSynthesis.speak(u); } catch (e) {} }
 /* ---------- 工具 ---------- */
-const chapterById = id => D.novels[0].chapters.find(c => c.id === id);
+const NV = () => D.novels[cur.novel || 0];
+const allChapters = () => D.novels.flatMap(n => n.chapters);
+const chapterById = id => allChapters().find(c => c.id === id);
 function contextOf(id, chId, hl = true) { // 該字所在段落（含該章的句子）
-  const ch = chapterById(chId) || D.novels[0].chapters.find(c => c.vocab.includes(id));
+  const ch = chapterById(chId) || chapterById(chOf(id));
   if (!ch) return '';
   const p = ch.paras.find(p => p.some(s => s.t === 'word' && s.id === id)); if (!p) return '';
   const idx = p.findIndex(s => s.t === 'word' && s.id === id);
@@ -204,7 +210,7 @@ function contextOf(id, chId, hl = true) { // 該字所在段落（含該章的�
   const plain = txt.split(/(?<=[。！？])/); const hit = plain.find(x => x.includes('<mark>'));
   return hit ? hit.trim() : txt;
 }
-const chOf = id => (D.novels[0].chapters.find(c => c.vocab.includes(id)) || {}).id;
+const chOf = id => { const c = NV().chapters[cur.ch]; if (c && c.vocab.includes(id)) return c.id; return (allChapters().find(c => c.vocab.includes(id)) || {}).id; };
 /* ---------- 路由 ---------- */
 let rd = {}; // 閱讀頁填空作答：{單字id: 對/錯}（僅練習，不影響複習排程）
 const rstat = () => `已答 ${Object.keys(rd).length} · 正確 ${Object.values(rd).filter(Boolean).length}`;
@@ -212,19 +218,19 @@ function wordHtml(x) {
   const s = S.set, a = rd[x.id], cls = a === undefined ? '' : a ? 'okc' : 'noc', id = esc(x.id), zh = esc(x.zh);
   const open = `onclick="card('${x.id}')"`;
   if (s.hz) { const n = [...x.zh].length; // 隱藏中文：英文（＿＿＿）
-    return `<span class="w"><span ${open}>${id}</span>（${a === undefined ? `<input class="rin zh" data-id="${id}" maxlength="${n}" style="width:${n * 1.2}em" autocomplete="off" autocapitalize="off" onchange="rchk(this)">` : `<i class="${cls}">${zh}</i>`}）</span>`; }
+    return `<span class="w"><span ${open}>${id}</span>（${a === undefined ? `<input class="rin zh" data-id="${id}" data-zh="${zh}" maxlength="${n}" style="width:${n * 1.2}em" autocomplete="off" autocapitalize="off" onchange="rchk(this)">` : `<i class="${cls}">${zh}</i>`}）</span>`; }
   if (s.he) { const n = x.id.length; // 隱藏英文：＿＿＿（中文）
     return `<span class="w">${a === undefined ? `<input class="rin en" data-id="${id}" maxlength="${n}" style="width:${n * 1.35}ch" autocomplete="off" autocapitalize="off" spellcheck="false" onchange="rchk(this)">` : `<span class="${cls}" ${open}>${id}</span>`}<i>（${zh}）</i></span>`; }
   return `<span class="w" ${open}><span>${id}</span> <i>（${zh}）</i></span>`;
 }
 function rchk(el) {
   const id = el.dataset.id, w = D.words[id], v = el.value.trim(); if (!v || rd[id] !== undefined) return;
-  const ok = S.set.hz ? okZh(v, w.zh) : v.toLowerCase() === id.toLowerCase(); rd[id] = ok;
+  const ok = S.set.hz ? okZh(v, el.dataset.zh) : sameEn(v, id); rd[id] = ok;
   const cls = ok ? 'okc' : 'noc';
-  el.outerHTML = S.set.hz ? `<i class="${cls}">${esc(w.zh)}</i>` : `<span class="${cls}" onclick="card('${id}')">${esc(id)}</span>`;
+  el.outerHTML = S.set.hz ? `<i class="${cls}">${esc(el.dataset.zh)}</i>` : `<span class="${cls}" onclick="card('${id}')">${esc(id)}</span>`;
   const e = document.getElementById('rstat'); if (e) e.textContent = rstat();
 }
-let view = 'home', cur = {ch: 0, mode: 'read', shuffle: []};
+let view = 'home', cur = {novel: 0, ch: 0, mode: 'read', shuffle: []};
 function go(v, p) { ttsHalt(); rd = {}; view = v; Object.assign(cur, p || {}); render(); scrollTo(0, 0); }
 function render() {
   document.body.classList.toggle('wb-open', !!(wbOpen && PROF && view === 'read'));
@@ -237,27 +243,36 @@ function render() {
   wbSync(); ttsSync();
 }
 /* ---------- 書架 ---------- */
+function nstat(n) { const v = n.chapters.flatMap(c => c.vocab); return {total: v.length, learn: v.filter(x => uw(x) && uw(x).inNb).length, done: v.filter(x => uw(x) && uw(x).mastered).length}; }
+function nlist() {
+  const q = (cur.q || '').trim().toLowerCase();
+  const l = D.novels.map((n, i) => [n, i]).filter(([n]) => !q || (n.num + ' ' + n.title).toLowerCase().includes(q));
+  return l.length ? l.map(([n, i]) => { const st = nstat(n), read = S.prog[n.id];
+    return `<div class="card nv" onclick="openNovel(${i})"><div class="nn">${String(n.num).padStart(2, '0')}</div><div class="sp"><b>${esc(n.title)}</b><div class="mute">${st.total} 個單字${st.learn ? ' · 生詞本 ' + st.learn : ''}${st.done ? ' · 已掌握 ' + st.done : ''}${read ? ' · 已讀' : ''}</div><div class="bar" style="margin-top:6px"><div style="width:${st.done / st.total * 100}%"></div></div></div></div>`; }).join('') : '<div class="mute">找不到符合的故事</div>';
+}
+function openNovel(i) { go(D.novels[i].chapters.length > 1 ? 'toc' : 'read', {novel: i, ch: 0}); }
 function home() {
-  const n = D.novels[0], due = dueList().length, p = S.prog[n.id];
+  const due = dueList().length, last = Object.entries(S.prog).sort((a, b) => b[1].at - a[1].at)[0], li = last ? D.novels.findIndex(n => n.id === last[0]) : -1;
   $('#app').innerHTML = `<h1>雅思小說閱讀</h1><div class="mute">Hi, ${esc(PROF)} · 在劇情裡自然記住單字</div>
   <div class="card row" onclick="go('review')" style="cursor:pointer"><div><b style="font-size:28px;color:var(--acct)">${due}</b> <span>個單字今日待複習</span></div><div class="sp"></div><button class="btn sm">開始複習</button></div>
-  <div class="card"><h2 style="margin-top:0">${esc(n.title)}</h2><div class="mute">${esc(n.desc)}</div>
-  <div class="mute" style="margin:10px 0">共 ${n.chapters.length} 章 · ${Object.keys(D.words).length} 個單字 · 已加入生詞本 ${Object.keys(S.words).length}</div>
-  <div class="row"><button class="btn" onclick="go('read',{ch:${p ? p.ch : 0}})">${p ? '繼續閱讀' : '開始閱讀'}</button><button class="btn ghost" onclick="go('toc')">目錄</button></div></div>`;
+  ${li >= 0 ? `<div class="card row" onclick="go('read',{novel:${li},ch:${last[1].ch}})" style="cursor:pointer"><div><div class="mute">繼續閱讀</div><b>${esc(D.novels[li].title)}</b></div><div class="sp"></div><button class="btn sm ghost">繼續</button></div>` : ''}
+  <h2>全部故事 <span class="mute">${D.novels.length} 篇 · ${Object.keys(D.words).length} 個單字 · 生詞本 ${Object.values(S.words).filter(u => u.inNb).length}</span></h2>
+  <input class="search" id="nq" placeholder="搜尋編號或標題" value="${esc(cur.q || '')}" oninput="cur.q=this.value;$('#nlist').innerHTML=nlist()">
+  <div id="nlist" class="ngrid">${nlist()}</div>`;
 }
 function toc() {
-  const n = D.novels[0];
-  $('#app').innerHTML = `<h1>${esc(n.title)}</h1>` + n.chapters.map((c, i) => {
+  const n = NV();
+  $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('home')">${ico('left')} 書架</button></div><h1>${esc(n.title)}</h1>` + n.chapters.map((c, i) => {
     const k = c.vocab.filter(v => uw(v) && uw(v).mastered).length;
     return `<div class="card" onclick="go('read',{ch:${i}})" style="cursor:pointer"><b>${esc(c.title)}</b><div class="mute">${c.vocab.length} 個單字 · 已掌握 ${k}</div><div class="bar" style="margin-top:8px"><div style="width:${k / c.vocab.length * 100}%"></div></div></div>`;
   }).join('');
 }
 /* ---------- 閱讀 ---------- */
 function read() {
-  const n = D.novels[0], c = n.chapters[cur.ch]; S.prog[n.id] = {ch: cur.ch, at: Date.now()}; save();
+  const n = NV(), c = n.chapters[cur.ch]; S.prog[n.id] = {ch: cur.ch, at: Date.now()}; save();
   const s = S.set;
   const html = c.paras.map(p => '<p>' + p.map(x => x.t === 'text' ? esc(x.v) : wordHtml(x)).join('') + '</p>').join('');
-  $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('toc')">${ico('left')} 目錄</button><span class="mute">第 ${c.index} 章 / 共 ${n.chapters.length} 章</span><div class="sp"></div>
+  $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('${n.chapters.length > 1 ? 'toc' : 'home'}')">${ico('left')} ${n.chapters.length > 1 ? '目錄' : '書架'}</button><span class="mute">${n.chapters.length > 1 ? `第 ${c.index} 章 / 共 ${n.chapters.length} 章` : `No.${n.num}`}</span><div class="sp"></div>
   <button class="chip" onclick="S.set.fs=Math.max(14,S.set.fs-2);save();render()">A-</button><button class="chip" onclick="S.set.fs=Math.min(30,S.set.fs+2);save();render()">A+</button>
   <button class="chip" onclick="S.set.theme={light:'sepia',sepia:'dark',dark:'light'}[S.set.theme];save();render()">主題</button></div>
   <div class="tools"><button class="chip ${s.hz ? 'on' : ''}" onclick="rd={};S.set.hz=!S.set.hz;S.set.he=false;save();render()">隱藏中文</button><button class="chip ${s.he ? 'on' : ''}" onclick="rd={};S.set.he=!S.set.he;S.set.hz=false;save();render()">隱藏英文</button>
@@ -269,11 +284,11 @@ function read() {
   <button class="chip ${s.sg ? 'on' : ''}" onclick="S.set.sg=!S.set.sg;save();this.classList.toggle('on');ttsRestart()">念中文釋義</button></div>
   <h1>${esc(c.title)}</h1><div class="read card">${html}</div>
   <div class="row"><button class="btn" onclick="cardSeq(0)">本章詞卡連刷（${c.vocab.length}）</button><button class="btn ghost" onclick="go('quiz',{mode:'zh',scope:'ch'})">默寫自測</button><div class="sp"></div>
-  <button class="btn ghost sm" ${cur.ch ? '' : 'disabled'} onclick="go('read',{ch:cur.ch-1})">上一章</button><button class="btn ghost sm" ${cur.ch < n.chapters.length - 1 ? '' : 'disabled'} onclick="go('read',{ch:cur.ch+1})">下一章</button></div>`;
+  <button class="btn ghost sm" ${cur.novel > 0 ? '' : 'disabled'} onclick="go('read',{novel:cur.novel-1,ch:0})">上一篇</button><button class="btn ghost sm" ${cur.novel < D.novels.length - 1 ? '' : 'disabled'} onclick="go('read',{novel:cur.novel+1,ch:0})">下一篇</button></div>`;
 }
 /* ---------- 詞卡 ---------- */
 let seq = null;
-function cardSeq(i) { seq = D.novels[0].chapters[cur.ch].vocab; card(seq[i], i); }
+function cardSeq(i) { seq = NV().chapters[cur.ch].vocab; card(seq[i], i); }
 function card(id, i) {
   const w = D.words[id], u = uw(id), ch = chapterById(chOf(id));
   const idx = seq && i != null ? i : (seq = null, -1);
@@ -329,19 +344,19 @@ function nb() {
 }
 /* ---------- 默寫 ---------- */
 function quiz() {
-  const c = D.novels[0].chapters[cur.ch];
+  const c = NV().chapters[cur.ch];
   let ids = c.vocab;
   if (cur.scope === 'nb') ids = Object.keys(S.words).filter(id => S.words[id].inNb);
   if (cur.scope === 'due') ids = dueList();
-  if (!cur.shuffle.length || cur.shuffleKey !== cur.scope + cur.ch) { cur.shuffle = ids.slice().sort(() => Math.random() - .5); cur.shuffleKey = cur.scope + cur.ch; cur.ans = {}; }
+  if (!cur.shuffle.length || cur.shuffleKey !== cur.scope + cur.novel + cur.ch) { cur.shuffle = ids.slice().sort(() => Math.random() - .5); cur.shuffleKey = cur.scope + cur.novel + cur.ch; cur.ans = {}; }
   const set = new Set(cur.shuffle), done = Object.keys(cur.ans).length, ok = Object.values(cur.ans).filter(Boolean).length;
   const zh = cur.mode === 'zh';
   const html = c.paras.map(p => '<p>' + p.map(x => {
     if (x.t === 'text') return esc(x.v);
     if (!set.has(x.id)) return `${esc(x.id)}（${esc(x.zh)}）`;
     const a = cur.ans[x.id], cls = a === undefined ? '' : a ? 'ok' : 'no';
-    return zh ? `${esc(x.id)}（<input class="quiz-in ${cls}" data-id="${x.id}" ${a !== undefined ? 'value="' + esc(a ? x.zh : '') + '"' : ''} onchange="chk(this)" placeholder="＿＿">）`
-              : `<input class="quiz-in ${cls}" data-id="${x.id}" style="width:110px" onchange="chk(this)" placeholder="＿＿">（${esc(x.zh)}）`;
+    return zh ? `${esc(x.id)}（<input class="quiz-in ${cls}" data-id="${x.id}" data-zh="${esc(x.zh)}" ${a !== undefined ? 'value="' + esc(a ? x.zh : '') + '"' : ''} onchange="chk(this)" placeholder="＿＿">）`
+              : `<input class="quiz-in ${cls}" data-id="${x.id}" data-zh="${esc(x.zh)}" style="width:110px" onchange="chk(this)" placeholder="＿＿">（${esc(x.zh)}）`;
   }).join('') + '</p>').join('');
   $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('read',{ch:${cur.ch}})">${ico('left')} 返回閱讀</button><div class="sp"></div><span class="mute">已答 ${done}/${cur.shuffle.length} · 正確 ${ok}</span></div><h1>默寫自測</h1>
   <div class="tools">${[['zh', '給英文寫中文'], ['en', '給中文寫英文']].map(t => `<button class="chip ${cur.mode === t[0] ? 'on' : ''}" onclick="cur.mode='${t[0]}';cur.shuffle=[];render()">${t[1]}</button>`).join('')}
@@ -349,13 +364,14 @@ function quiz() {
   <button class="chip" onclick="cur.shuffle=[];render()">清空重考</button></div>
   <div class="read card">${html}</div><div class="mute">輸入後按 Enter 或點別處即判分。答對算「記得」，答錯算「忘了」並加入生詞本。</div>`;
 }
+const sameEn = (a, b) => a.trim().toLowerCase().replace(/'/g, '\u2019').replace(/\s+/g, ' ') === b.toLowerCase();
 const zcore = z => z.replace(/[的地]$/, '');
-function okZh(v, zh) { const c = zcore(zh), u = zcore(v); return u === c || (u.length >= 2 && (c.includes(u) || (c.length >= 2 && u.includes(c)))); }
+function okZh(v, zh) { if (!zh) return false; const c = zcore(zh), u = zcore(v); return u === c || (u.length >= 2 && (c.includes(u) || (c.length >= 2 && u.includes(c)))); }
 function chk(el) {
   const id = el.dataset.id, w = D.words[id], v = el.value.trim(); if (!v || cur.ans[id] !== undefined) return;
-  const ok = cur.mode === 'zh' ? okZh(v, w.zh) : v.toLowerCase() === id;
+  const ok = cur.mode === 'zh' ? okZh(v, el.dataset.zh) : sameEn(v, id);
   cur.ans[id] = ok; addWord(id, chOf(id)); rate(id, ok ? 'good' : 'again', 'quiz');
-  el.classList.add(ok ? 'ok' : 'no'); if (!ok) el.value = (cur.mode === 'zh' ? w.zh : id) + ' ✗';
+  el.classList.add(ok ? 'ok' : 'no'); if (!ok) el.value = (cur.mode === 'zh' ? el.dataset.zh : id) + ' ✗';
   const st = document.querySelector('.row .mute'); if (st) st.textContent = `已答 ${Object.keys(cur.ans).length}/${cur.shuffle.length} · 正確 ${Object.values(cur.ans).filter(Boolean).length}`;
 }
 /* ---------- 統計 / 設定 ---------- */
@@ -386,7 +402,7 @@ function wbMarks() { document.querySelectorAll('#wb .sw').forEach(b => b.classLi
 function wbSync() {
   if (!document.body.classList.contains('wb-open')) return;
   const c = $('#wbc'), r = c.getBoundingClientRect(); if (!r.width) return;
-  const key = 'ielts-board:' + PROF + ':' + D.novels[0].chapters[cur.ch].id, d = window.devicePixelRatio || 1;
+  const key = 'ielts-board:' + PROF + ':' + NV().chapters[cur.ch].id, d = window.devicePixelRatio || 1;
   if (key !== wbKey) { wbKey = key; try { wbStrokes = JSON.parse(lsGet(key) || '[]'); } catch (e) { wbStrokes = []; } }
   c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); wbRedraw(); wbMarks();
 }
@@ -419,7 +435,7 @@ function wbClear() { if (wbStrokes.length && confirm('清除這一章的白板�
 const tts = {show: false, playing: false, i: 0, q: [], tok: 0};
 const ttsSyn = window.speechSynthesis;
 function ttsBuild() {
-  const c = D.novels[0].chapters[cur.ch]; tts.q = []; let wk = 0;
+  const c = NV().chapters[cur.ch]; tts.q = []; let wk = 0;
   c.paras.forEach((p, pi) => p.forEach(x => {
     if (x.t === 'text') { if (/[\u4e00-\u9fffA-Za-z0-9]/.test(x.v)) tts.q.push({l: 'zh', t: x.v, p: pi}); }
     else { tts.q.push({l: 'en', t: x.id, p: pi, w: wk}); if (S.set.sg) tts.q.push({l: 'zh', t: x.zh, p: pi, w: wk}); wk++; }
