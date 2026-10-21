@@ -1,0 +1,13 @@
+# Story01：冷峻總裁的限時婚約
+
+蘇念薇從未想過，自己會在一個{desperate|絕望的}的雨夜，被迫走進陸景琛的{magnificent|宏偉的}辦公室。她的父親因為一筆{enormous|鉅額的}債務，將整個蘇家推向了{bankruptcy|破產}的邊緣。而陸景琛——這座城市最{prominent|顯赫的}的商業{empire|帝國}的掌控者，是唯一能{rescue|拯救}她家族的人。"我可以{eliminate|消除}你父親所有的債務，"陸景琛坐在黑色皮椅上，聲音{indifferent|冷漠的}得像冬日寒風，"但你必須{comply|遵從}一個條件——和我簽一份{temporary|臨時的}婚約，為期一年。"蘇念薇的手指微微{tremble|顫抖}。她知道這個男人的{reputation|名聲}——冷酷、{arrogant|傲慢的}、從不對任何人{yield|讓步}。但她別無{alternative|選擇}。
+
+婚禮在三天後{proceed|進行}，一切{efficient|高效的}得令人窒息。沒有{romantic|浪漫的}的誓言，沒有{heartfelt|真摯的}的祝福，只有一份厚厚的{pact|契約}和律師{witness|見證}下的簽字。蘇念薇穿著{elegant|優雅的}的白色禮服，臉上{maintain|維持}著得體的微笑，內心卻如同被{confine|禁錮}在冰窖之中。搬進陸家{luxury|奢華的}別墅的第一天，管家遞給她一份{detailed|詳細的}的規則清單。"陸先生{emphasize|強調}，你們的關係僅限於{shallow|膚淺的}的夫妻{appearance|外表}，"管家{neutral|中立地}說道，"請不要{interfere|干涉}他的私人生活。"蘇念薇{nod|點頭}，將所有{humiliation|屈辱}嚥下。她暗暗{resolve|決心}，一年之後，她會{regain|重獲}自由，{restore|恢復}蘇家的{dignity|尊嚴}。
+
+然而，命運總是{unpredictable|不可預測的}。一個月後，蘇念薇在公司{annual|年度}晚宴上{encounter|遇到}了陸景琛的商業{rival|對手}——沈墨寒。沈墨寒對她展現出{extraordinary|非凡的}的{courtesy|禮貌}，這讓陸景琛的眼神瞬間變得{intense|強烈的}。"你似乎很{keen|熱衷}於和我的{opponent|對手}交談，"回家的車上，陸景琛的聲音帶著{subtle|微妙的}的{hostility|敵意}。"我只是在{fulfill|履行}你要求的'{superficial|表面的}夫妻'角色，"蘇念薇{calm|冷靜地}回應，"在{social|社交}場合保持{appropriate|得體的}，不正是你{expect|期望}的嗎？"陸景琛沉默了。他第一次{realize|意識到}，這個女人並不像他{assume|以為}的那樣{submissive|順從的}。
+
+轉折發生在第三個月。蘇念薇{discover|發現}陸景琛深夜獨自坐在書房，面前攤著一張{faded|褪色的}照片。照片上是一個年輕女人，笑容{radiant|燦爛的}。她沒有{inquire|詢問}，只是默默端了一杯熱茶放在桌上，然後{withdraw|退出}。那一刻，陸景琛抬頭看她的眼神，第一次沒有了{contempt|輕蔑}，取而代之的是一種{complex|複雜的}的{emotion|情感}。日子一天天過去，蘇念薇用她的{intelligence|智慧}和{diligence|勤奮}，在陸氏集團的{charity|慈善}部門找到了自己的{position|位置}。她{organize|組織}了一場{spectacular|壯觀的}的公益活動，為山區兒童{raise|籌集}了{substantial|大量的}善款。這讓公司上下對她{admire|欽佩}不已。
+
+第六個月，危機{erupt|爆發}。有人{deliberately|蓄意地}向媒體{leak|洩露}了他們婚約的{authentic|真實}性質。輿論{explode|爆炸}，股價{plunge|暴跌}。陸景琛面臨董事會的{severe|嚴厲的}質疑。蘇念薇沒有{hesitate|猶豫}。她站在新聞發佈會上，面對無數鏡頭，聲音{steady|穩定的}而{sincere|真誠的}："我和景琛的婚姻，從一開始就是{mutual|相互的}的選擇。外界的{speculation|猜測}不能{define|定義}我們的關係。"她的{courage|勇氣}和{eloquence|口才}成功{suppress|壓制}了風波。那天晚上，陸景琛第一次主動敲開了她的房門。"謝謝你，"他說，聲音低沉而{vulnerable|脆弱的}，"你本可以{abandon|拋棄}這一切。""我答應過的事，就會{honor|信守}，"蘇念薇{gaze|凝視}著他的眼睛，"這是我的{principle|原則}。"
+
+第十個月，陸景琛終於向她{confess|坦白}了一切。那張照片上的女人是他的姐姐，五年前因為一場商業{conspiracy|陰謀}而{perish|喪生}。他一直在{pursue|追查}真相，而這場婚約，最初只是他{strategic|戰略性的}佈局的一部分。"但現在，"他握住蘇念薇的手，目光前所未有地{tender|溫柔的}，"你已經{transform|改變}了一切的{significance|意義}。"蘇念薇的眼眶{moist|溼潤的}了。她終於{comprehend|理解}，在這個男人{rigid|僵硬的}的外殼之下，藏著一顆{fragile|脆弱的}而{passionate|熱烈的}的心。一年期限到了。陸景琛將那份{covenant|盟約}撕成碎片，單膝跪地，手中是一枚{exquisite|精美的}的鑽戒。"蘇念薇，這一次，沒有{contract|合同}，沒有{obligation|義務}，只有我{genuine|真誠的}想和你走完餘生的心。你願意嗎？"她笑著流淚，{embrace|擁抱}了他。窗外，城市的燈火{illuminate|照亮}了整個夜空，彷彿在為這段從{transaction|交易}開始、以真愛{conclude|結束}的故事，獻上最{splendid|輝煌的}的祝福。

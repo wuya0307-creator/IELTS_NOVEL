@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>雅思小說閱讀</title>
+<style>
+:root{--bg:#f5f8fc;--fg:#1f2733;--mute:#7b8594;--card:#fff;--line:#dde5ef;--acc:#8BB8E8;--acct:#3d73b0;--on:#0f2542;--accbg:#e4eefa;--wordbg:rgba(120,125,135,.16)}
+[data-theme=sepia]{--bg:#f4ecd8;--card:#fbf5e6;--line:#dcd0b4;--wordbg:rgba(110,110,100,.16)}
+[data-theme=dark]{--bg:#17161a;--fg:#e6e2dc;--mute:#908a82;--card:#222127;--line:#34323a;--acc:#8BB8E8;--acct:#8BB8E8;--accbg:#23364d;--wordbg:rgba(200,205,215,.16)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+#app{max-width:760px;margin:0 auto;padding:16px 16px 90px}
+h1{font-size:22px;margin:8px 0 4px}h2{font-size:18px;margin:20px 0 8px}
+.mute{color:var(--mute);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.btn{background:var(--acc);color:var(--on);border:0;border-radius:10px;padding:10px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--acct);border:1px solid var(--acc)}
+.btn.sm{padding:6px 10px;font-size:13px}
+.btn:disabled{opacity:.4}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{flex:1}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{flex:1;max-width:150px;background:none;border:0;padding:10px 0;font-size:12px;color:var(--mute)}
+nav button.on{color:var(--acct);font-weight:700}nav b{display:block;height:24px}nav svg,.ic{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.25em}nav svg{width:24px;height:24px}
+/* reader */
+.read{font-size:var(--fs,18px);line-height:var(--lh,2.1)}
+.read p{margin:0 0 1.2em;text-align:justify}
+.w{background:var(--wordbg);border-radius:6px;padding:1px 6px;cursor:pointer;white-space:nowrap}
+.w.hz i{display:none}.w.he span{display:none}
+.w i{font-style:normal;opacity:.85}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:13px}
+.chip.on{background:var(--acc);color:var(--on);border-color:var(--acc)}
+/* sheet */
+#ov{position:fixed;inset:0;background:#0006;display:none;align-items:flex-end;justify-content:center;z-index:10}
+#ov.show{display:flex}
+#sheet{background:var(--card);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto}
+@media(min-width:700px){#ov{align-items:center}#sheet{border-radius:20px}}
+.hw{font-size:30px;font-weight:700}.pos{color:var(--mute);font-size:14px;margin-left:6px}
+.tag{display:inline-block;background:var(--accbg);color:var(--acct);border-radius:6px;padding:2px 8px;font-size:12px;margin-right:4px}
+.ctx{background:var(--bg);border-left:3px solid var(--acc);padding:8px 12px;border-radius:6px;font-size:14px;line-height:1.8;margin:8px 0}
+.ctx mark{background:var(--accbg);color:var(--acct);border-radius:4px;padding:0 3px;font-weight:700}
+.syn{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:3px 10px;margin:3px 4px 3px 0;font-size:14px}
+.quiz-in{width:92px;border:0;border-bottom:2px solid var(--acc);background:transparent;font:inherit;color:var(--fg);text-align:center;padding:0 2px}
+.quiz-in.ok{border-color:#3a9d5d;color:#3a9d5d}.quiz-in.no{border-color:#d9534f;color:#d9534f}
+.big{font-size:34px;font-weight:700;text-align:center;margin:30px 0 10px}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.bar>div{height:100%;background:var(--acc)}
+select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:5px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<nav id="nav"></nav>
+<div id="ov"><div id="sheet"></div></div>
+<script>window.DATA={"novels": [{"id": "n1", "title": "冷峻總裁的限時婚約", "desc": "一紙一年婚約，從交易走向真愛。邊讀劇情，邊記住雅思單字。", "chapters": [{"id": "n1c1", "index": 1, "title": "Story01：冷峻總裁的限時婚約", "paras": [[{"t": "text", "v": "蘇念薇從未想過，自己會在一個"}, {"t": "word", "id": "desperate", "zh": "絕望的"}, {"t": "text", "v": "的雨夜，被迫走進陸景琛的"}, {"t": "word", "id": "magnificent", "zh": "宏偉的"}, {"t": "text", "v": "辦公室。她的父親因為一筆"}, {"t": "word", "id": "enormous", "zh": "鉅額的"}, {"t": "text", "v": "債務，將整個蘇家推向了"}, {"t": "word", "id": "bankruptcy", "zh": "破產"}, {"t": "text", "v": "的邊緣。而陸景琛——這座城市最"}, {"t": "word", "id": "prominent", "zh": "顯赫的"}, {"t": "text", "v": "的商業"}, {"t": "word", "id": "empire", "zh": "帝國"}, {"t": "text", "v": "的掌控者，是唯一能"}, {"t": "word", "id": "rescue", "zh": "拯救"}, {"t": "text", "v": "她家族的人。\"我可以"}, {"t": "word", "id": "eliminate", "zh": "消除"}, {"t": "text", "v": "你父親所有的債務，\"陸景琛坐在黑色皮椅上，聲音"}, {"t": "word", "id": "indifferent", "zh": "冷漠的"}, {"t": "text", "v": "得像冬日寒風，\"但你必須"}, {"t": "word", "id": "comply", "zh": "遵從"}, {"t": "text", "v": "一個條件——和我簽一份"}, {"t": "word", "id": "temporary", "zh": "臨時的"}, {"t": "text", "v": "婚約，為期一年。\"蘇念薇的手指微微"}, {"t": "word", "id": "tremble", "zh": "顫抖"}, {"t": "text", "v": "。她知道這個男人的"}, {"t": "word", "id": "reputation", "zh": "名聲"}, {"t": "text", "v": "——冷酷、"}, {"t": "word", "id": "arrogant", "zh": "傲慢的"}, {"t": "text", "v": "、從不對任何人"}, {"t": "word", "id": "yield", "zh": "讓步"}, {"t": "text", "v": "。但她別無"}, {"t": "word", "id": "alternative", "zh": "選擇"}, {"t": "text", "v": "。"}], [{"t": "text", "v": "婚禮在三天後"}, {"t": "word", "id": "proceed", "zh": "進行"}, {"t": "text", "v": "，一切"}, {"t": "word", "id": "efficient", "zh": "高效的"}, {"t": "text", "v": "得令人窒息。沒有"}, {"t": "word", "id": "romantic", "zh": "浪漫的"}, {"t": "text", "v": "的誓言，沒有"}, {"t": "word", "id": "heartfelt", "zh": "真摯的"}, {"t": "text", "v": "的祝福，只有一份厚厚的"}, {"t": "word", "id": "pact", "zh": "契約"}, {"t": "text", "v": "和律師"}, {"t": "word", "id": "witness", "zh": "見證"}, {"t": "text", "v": "下的簽字。蘇念薇穿著"}, {"t": "word", "id": "elegant", "zh": "優雅的"}, {"t": "text", "v": "的白色禮服，臉上"}, {"t": "word", "id": "maintain", "zh": "維持"}, {"t": "text", "v": "著得體的微笑，內心卻如同被"}, {"t": "word", "id": "confine", "zh": "禁錮"}, {"t": "text", "v": "在冰窖之中。搬進陸家"}, {"t": "word", "id": "luxury", "zh": "奢華的"}, {"t": "text", "v": "別墅的第一天，管家遞給她一份"}, {"t": "word", "id": "detailed", "zh": "詳細的"}, {"t": "text", "v": "的規則清單。\"陸先生"}, {"t": "word", "id": "emphasize", "zh": "強調"}, {"t": "text", "v": "，你們的關係僅限於"}, {"t": "word", "id": "shallow", "zh": "膚淺的"}, {"t": "text", "v": "的夫妻"}, {"t": "word", "id": "appearance", "zh": "外表"}, {"t": "text", "v": "，\"管家"}, {"t": "word", "id": "neutral", "zh": "中立地"}, {"t": "text", "v": "說道，\"請不要"}, {"t": "word", "id": "interfere", "zh": "干涉"}, {"t": "text", "v": "他的私人生活。\"蘇念薇"}, {"t": "word", "id": "nod", "zh": "點頭"}, {"t": "text", "v": "，將所有"}, {"t": "word", "id": "humiliation", "zh": "屈辱"}, {"t": "text", "v": "嚥下。她暗暗"}, {"t": "word", "id": "resolve", "zh": "決心"}, {"t": "text", "v": "，一年之後，她會"}, {"t": "word", "id": "regain", "zh": "重獲"}, {"t": "text", "v": "自由，"}, {"t": "word", "id": "restore", "zh": "恢復"}, {"t": "text", "v": "蘇家的"}, {"t": "word", "id": "dignity", "zh": "尊嚴"}, {"t": "text", "v": "。"}], [{"t": "text", "v": "然而，命運總是"}, {"t": "word", "id": "unpredictable", "zh": "不可預測的"}, {"t": "text", "v": "。一個月後，蘇念薇在公司"}, {"t": "word", "id": "annual", "zh": "年度"}, {"t": "text", "v": "晚宴上"}, {"t": "word", "id": "encounter", "zh": "遇到"}, {"t": "text", "v": "了陸景琛的商業"}, {"t": "word", "id": "rival", "zh": "對手"}, {"t": "text", "v": "——沈墨寒。沈墨寒對她展現出"}, {"t": "word", "id": "extraordinary", "zh": "非凡的"}, {"t": "text", "v": "的"}, {"t": "word", "id": "courtesy", "zh": "禮貌"}, {"t": "text", "v": "，這讓陸景琛的眼神瞬間變得"}, {"t": "word", "id": "intense", "zh": "強烈的"}, {"t": "text", "v": "。\"你似乎很"}, {"t": "word", "id": "keen", "zh": "熱衷"}, {"t": "text", "v": "於和我的"}, {"t": "word", "id": "opponent", "zh": "對手"}, {"t": "text", "v": "交談，\"回家的車上，陸景琛的聲音帶著"}, {"t": "word", "id": "subtle", "zh": "微妙的"}, {"t": "text", "v": "的"}, {"t": "word", "id": "hostility", "zh": "敵意"}, {"t": "text", "v": "。\"我只是在"}, {"t": "word", "id": "fulfill", "zh": "履行"}, {"t": "text", "v": "你要求的'"}, {"t": "word", "id": "superficial", "zh": "表面的"}, {"t": "text", "v": "夫妻'角色，\"蘇念薇"}, {"t": "word", "id": "calm", "zh": "冷靜地"}, {"t": "text", "v": "回應，\"在"}, {"t": "word", "id": "social", "zh": "社交"}, {"t": "text", "v": "場合保持"}, {"t": "word", "id": "appropriate", "zh": "得體的"}, {"t": "text", "v": "，不正是你"}, {"t": "word", "id": "expect", "zh": "期望"}, {"t": "text", "v": "的嗎？\"陸景琛沉默了。他第一次"}, {"t": "word", "id": "realize", "zh": "意識到"}, {"t": "text", "v": "，這個女人並不像他"}, {"t": "word", "id": "assume", "zh": "以為"}, {"t": "text", "v": "的那樣"}, {"t": "word", "id": "submissive", "zh": "順從的"}, {"t": "text", "v": "。"}], [{"t": "text", "v": "轉折發生在第三個月。蘇念薇"}, {"t": "word", "id": "discover", "zh": "發現"}, {"t": "text", "v": "陸景琛深夜獨自坐在書房，面前攤著一張"}, {"t": "word", "id": "faded", "zh": "褪色的"}, {"t": "text", "v": "照片。照片上是一個年輕女人，笑容"}, {"t": "word", "id": "radiant", "zh": "燦爛的"}, {"t": "text", "v": "。她沒有"}, {"t": "word", "id": "inquire", "zh": "詢問"}, {"t": "text", "v": "，只是默默端了一杯熱茶放在桌上，然後"}, {"t": "word", "id": "withdraw", "zh": "退出"}, {"t": "text", "v": "。那一刻，陸景琛抬頭看她的眼神，第一次沒有了"}, {"t": "word", "id": "contempt", "zh": "輕蔑"}, {"t": "text", "v": "，取而代之的是一種"}, {"t": "word", "id": "complex", "zh": "複雜的"}, {"t": "text", "v": "的"}, {"t": "word", "id": "emotion", "zh": "情感"}, {"t": "text", "v": "。日子一天天過去，蘇念薇用她的"}, {"t": "word", "id": "intelligence", "zh": "智慧"}, {"t": "text", "v": "和"}, {"t": "word", "id": "diligence", "zh": "勤奮"}, {"t": "text", "v": "，在陸氏集團的"}, {"t": "word", "id": "charity", "zh": "慈善"}, {"t": "text", "v": "部門找到了自己的"}, {"t": "word", "id": "position", "zh": "位置"}, {"t": "text", "v": "。她"}, {"t": "word", "id": "organize", "zh": "組織"}, {"t": "text", "v": "了一場"}, {"t": "word", "id": "spectacular", "zh": "壯觀的"}, {"t": "text", "v": "的公益活動，為山區兒童"}, {"t": "word", "id": "raise", "zh": "籌集"}, {"t": "text", "v": "了"}, {"t": "word", "id": "substantial", "zh": "大量的"}, {"t": "text", "v": "善款。這讓公司上下對她"}, {"t": "word", "id": "admire", "zh": "欽佩"}, {"t": "text", "v": "不已。"}], [{"t": "text", "v": "第六個月，危機"}, {"t": "word", "id": "erupt", "zh": "爆發"}, {"t": "text", "v": "。有人"}, {"t": "word", "id": "deliberately", "zh": "蓄意地"}, {"t": "text", "v": "向媒體"}, {"t": "word", "id": "leak", "zh": "洩露"}, {"t": "text", "v": "了他們婚約的"}, {"t": "word", "id": "authentic", "zh": "真實"}, {"t": "text", "v": "性質。輿論"}, {"t": "word", "id": "explode", "zh": "爆炸"}, {"t": "text", "v": "，股價"}, {"t": "word", "id": "plunge", "zh": "暴跌"}, {"t": "text", "v": "。陸景琛面臨董事會的"}, {"t": "word", "id": "severe", "zh": "嚴厲的"}, {"t": "text", "v": "質疑。蘇念薇沒有"}, {"t": "word", "id": "hesitate", "zh": "猶豫"}, {"t": "text", "v": "。她站在新聞發佈會上，面對無數鏡頭，聲音"}, {"t": "word", "id": "steady", "zh": "穩定的"}, {"t": "text", "v": "而"}, {"t": "word", "id": "sincere", "zh": "真誠的"}, {"t": "text", "v": "：\"我和景琛的婚姻，從一開始就是"}, {"t": "word", "id": "mutual", "zh": "相互的"}, {"t": "text", "v": "的選擇。外界的"}, {"t": "word", "id": "speculation", "zh": "猜測"}, {"t": "text", "v": "不能"}, {"t": "word", "id": "define", "zh": "定義"}, {"t": "text", "v": "我們的關係。\"她的"}, {"t": "word", "id": "courage", "zh": "勇氣"}, {"t": "text", "v": "和"}, {"t": "word", "id": "eloquence", "zh": "口才"}, {"t": "text", "v": "成功"}, {"t": "word", "id": "suppress", "zh": "壓制"}, {"t": "text", "v": "了風波。那天晚上，陸景琛第一次主動敲開了她的房門。\"謝謝你，\"他說，聲音低沉而"}, {"t": "word", "id": "vulnerable", "zh": "脆弱的"}, {"t": "text", "v": "，\"你本可以"}, {"t": "word", "id": "abandon", "zh": "拋棄"}, {"t": "text", "v": "這一切。\"\"我答應過的事，就會"}, {"t": "word", "id": "honor", "zh": "信守"}, {"t": "text", "v": "，\"蘇念薇"}, {"t": "word", "id": "gaze", "zh": "凝視"}, {"t": "text", "v": "著他的眼睛，\"這是我的"}, {"t": "word", "id": "principle", "zh": "原則"}, {"t": "text", "v": "。\""}], [{"t": "text", "v": "第十個月，陸景琛終於向她"}, {"t": "word", "id": "confess", "zh": "坦白"}, {"t": "text", "v": "了一切。那張照片上的女人是他的姐姐，五年前因為一場商業"}, {"t": "word", "id": "conspiracy", "zh": "陰謀"}, {"t": "text", "v": "而"}, {"t": "word", "id": "perish", "zh": "喪生"}, {"t": "text", "v": "。他一直在"}, {"t": "word", "id": "pursue", "zh": "追查"}, {"t": "text", "v": "真相，而這場婚約，最初只是他"}, {"t": "word", "id": "strategic", "zh": "戰略性的"}, {"t": "text", "v": "佈局的一部分。\"但現在，\"他握住蘇念薇的手，目光前所未有地"}, {"t": "word", "id": "tender", "zh": "溫柔的"}, {"t": "text", "v": "，\"你已經"}, {"t": "word", "id": "transform", "zh": "改變"}, {"t": "text", "v": "了一切的"}, {"t": "word", "id": "significance", "zh": "意義"}, {"t": "text", "v": "。\"蘇念薇的眼眶"}, {"t": "word", "id": "moist", "zh": "溼潤的"}, {"t": "text", "v": "了。她終於"}, {"t": "word", "id": "comprehend", "zh": "理解"}, {"t": "text", "v": "，在這個男人"}, {"t": "word", "id": "rigid", "zh": "僵硬的"}, {"t": "text", "v": "的外殼之下，藏著一顆"}, {"t": "word", "id": "fragile", "zh": "脆弱的"}, {"t": "text", "v": "而"}, {"t": "word", "id": "passionate", "zh": "熱烈的"}, {"t": "text", "v": "的心。一年期限到了。陸景琛將那份"}, {"t": "word", "id": "covenant", "zh": "盟約"}, {"t": "text", "v": "撕成碎片，單膝跪地，手中是一枚"}, {"t": "word", "id": "exquisite", "zh": "精美的"}, {"t": "text", "v": "的鑽戒。\"蘇念薇，這一次，沒有"}, {"t": "word", "id": "contract", "zh": "合同"}, {"t": "text", "v": "，沒有"}, {"t": "word", "id": "obligation", "zh": "義務"}, {"t": "text", "v": "，只有我"}, {"t": "word", "id": "genuine", "zh": "真誠的"}, {"t": "text", "v": "想和你走完餘生的心。你願意嗎？\"她笑著流淚，"}, {"t": "word", "id": "embrace", "zh": "擁抱"}, {"t": "text", "v": "了他。窗外，城市的燈火"}, {"t": "word", "id": "illuminate", "zh": "照亮"}, {"t": "text", "v": "了整個夜空，彷彿在為這段從"}, {"t": "word", "id": "transaction", "zh": "交易"}, {"t": "text", "v": "開始、以真愛"}, {"t": "word", "id": "conclude", "zh": "結束"}, {"t": "text", "v": "的故事，獻上最"}, {"t": "word", "id": "splendid", "zh": "輝煌的"}, {"t": "text", "v": "的祝福。"}]], "vocab": ["desperate", "magnificent", "enormous", "bankruptcy", "prominent", "empire", "rescue", "eliminate", "indifferent", "comply", "temporary", "tremble", "reputation", "arrogant", "yield", "alternative", "proceed", "efficient", "romantic", "heartfelt", "pact", "witness", "elegant", "maintain", "confine", "luxury", "detailed", "emphasize", "shallow", "appearance", "neutral", "interfere", "nod", "humiliation", "resolve", "regain", "restore", "dignity", "unpredictable", "annual", "encounter", "rival", "extraordinary", "courtesy", "intense", "keen", "opponent", "subtle", "hostility", "fulfill", "superficial", "calm", "social", "appropriate", "expect", "realize", "assume", "submissive", "discover", "faded", "radiant", "inquire", "withdraw", "contempt", "complex", "emotion", "intelligence", "diligence", "charity", "position", "organize", "spectacular", "raise", "substantial", "admire", "erupt", "deliberately", "leak", "authentic", "explode", "plunge", "severe", "hesitate", "steady", "sincere", "mutual", "speculation", "define", "courage", "eloquence", "suppress", "vulnerable", "abandon", "honor", "gaze", "principle", "confess", "conspiracy", "perish", "pursue", "strategic", "tender", "transform", "significance", "moist", "comprehend", "rigid", "fragile", "passionate", "covenant", "exquisite", "contract", "obligation", "genuine", "embrace", "illuminate", "transaction", "conclude", "splendid"]}]}], "words": {"desperate": {"id": "desperate", "zh": "絕望的", "pos": "a.", "syn": ["hopeless", "despairing"]}, "magnificent": {"id": "magnificent", "zh": "宏偉的", "pos": "a.", "syn": ["splendid", "grand"]}, "enormous": {"id": "enormous", "zh": "鉅額的", "pos": "a.", "syn": ["huge", "immense"]}, "bankruptcy": {"id": "bankruptcy", "zh": "破產", "pos": "n.", "syn": ["insolvency", "ruin"]}, "prominent": {"id": "prominent", "zh": "顯赫的", "pos": "a.", "syn": ["eminent", "notable"]}, "empire": {"id": "empire", "zh": "帝國", "pos": "n.", "syn": ["dominion", "realm"]}, "rescue": {"id": "rescue", "zh": "拯救", "pos": "v.", "syn": ["save", "deliver"]}, "eliminate": {"id": "eliminate", "zh": "消除", "pos": "v.", "syn": ["remove", "eradicate"]}, "indifferent": {"id": "indifferent", "zh": "冷漠的", "pos": "a.", "syn": ["apathetic", "unconcerned"]}, "comply": {"id": "comply", "zh": "遵從", "pos": "v.", "syn": ["obey", "conform"]}, "temporary": {"id": "temporary", "zh": "臨時的", "pos": "a.", "syn": ["short-term", "provisional"]}, "tremble": {"id": "tremble", "zh": "顫抖", "pos": "v.", "syn": ["shake", "shiver"]}, "reputation": {"id": "reputation", "zh": "名聲", "pos": "n.", "syn": ["standing", "renown"]}, "arrogant": {"id": "arrogant", "zh": "傲慢的", "pos": "a.", "syn": ["haughty", "conceited"]}, "yield": {"id": "yield", "zh": "讓步", "pos": "v.", "syn": ["give in", "surrender"]}, "alternative": {"id": "alternative", "zh": "選擇", "pos": "n.", "syn": ["option", "choice"]}, "proceed": {"id": "proceed", "zh": "進行", "pos": "v.", "syn": ["go ahead", "advance"]}, "efficient": {"id": "efficient", "zh": "高效的", "pos": "a.", "syn": ["effective", "productive"]}, "romantic": {"id": "romantic", "zh": "浪漫的", "pos": "a.", "syn": ["passionate", "amorous"]}, "heartfelt": {"id": "heartfelt", "zh": "真摯的", "pos": "a.", "syn": ["sincere", "genuine"]}, "pact": {"id": "pact", "zh": "契約", "pos": "n.", "syn": ["agreement", "treaty"]}, "witness": {"id": "witness", "zh": "見證", "pos": "v.", "syn": ["observe", "see"]}, "elegant": {"id": "elegant", "zh": "優雅的", "pos": "a.", "syn": ["graceful", "refined"]}, "maintain": {"id": "maintain", "zh": "維持", "pos": "v.", "syn": ["sustain", "preserve"]}, "confine": {"id": "confine", "zh": "禁錮", "pos": "v.", "syn": ["restrict", "imprison"]}, "luxury": {"id": "luxury", "zh": "奢華的", "pos": "a.", "syn": ["lavish", "opulent"]}, "detailed": {"id": "detailed", "zh": "詳細的", "pos": "a.", "syn": ["thorough", "comprehensive"]}, "emphasize": {"id": "emphasize", "zh": "強調", "pos": "v.", "syn": ["stress", "highlight"]}, "shallow": {"id": "shallow", "zh": "膚淺的", "pos": "a.", "syn": ["superficial", "trivial"]}, "appearance": {"id": "appearance", "zh": "外表", "pos": "n.", "syn": ["look", "façade"]}, "neutral": {"id": "neutral", "zh": "中立地", "pos": "a.", "syn": ["impartial", "unbiased"]}, "interfere": {"id": "interfere", "zh": "干涉", "pos": "v.", "syn": ["meddle", "intervene"]}, "nod": {"id": "nod", "zh": "點頭", "pos": "v.", "syn": ["bow", "signal"]}, "humiliation": {"id": "humiliation", "zh": "屈辱", "pos": "n.", "syn": ["disgrace", "shame"]}, "resolve": {"id": "resolve", "zh": "決心", "pos": "v.", "syn": ["determine", "decide"]}, "regain": {"id": "regain", "zh": "重獲", "pos": "v.", "syn": ["recover", "retrieve"]}, "restore": {"id": "restore", "zh": "恢復", "pos": "v.", "syn": ["reinstate", "renew"]}, "dignity": {"id": "dignity", "zh": "尊嚴", "pos": "n.", "syn": ["honour", "self-respect"]}, "unpredictable": {"id": "unpredictable", "zh": "不可預測的", "pos": "a.", "syn": ["erratic", "uncertain"]}, "annual": {"id": "annual", "zh": "年度", "pos": "a.", "syn": ["yearly", "once a year"]}, "encounter": {"id": "encounter", "zh": "遇到", "pos": "v.", "syn": ["meet", "come across"]}, "rival": {"id": "rival", "zh": "對手", "pos": "n.", "syn": ["competitor", "opponent"]}, "extraordinary": {"id": "extraordinary", "zh": "非凡的", "pos": "a.", "syn": ["remarkable", "exceptional"]}, "courtesy": {"id": "courtesy", "zh": "禮貌", "pos": "n.", "syn": ["politeness", "civility"]}, "intense": {"id": "intense", "zh": "強烈的", "pos": "a.", "syn": ["fierce", "extreme"]}, "keen": {"id": "keen", "zh": "熱衷", "pos": "a.", "syn": ["eager", "enthusiastic"]}, "opponent": {"id": "opponent", "zh": "對手", "pos": "n.", "syn": ["adversary", "rival"]}, "subtle": {"id": "subtle", "zh": "微妙的", "pos": "a.", "syn": ["delicate", "understated"]}, "hostility": {"id": "hostility", "zh": "敵意", "pos": "n.", "syn": ["animosity", "enmity"]}, "fulfill": {"id": "fulfill", "zh": "履行", "pos": "v.", "syn": ["accomplish", "carry out"]}, "superficial": {"id": "superficial", "zh": "表面的", "pos": "a.", "syn": ["shallow", "cursory"]}, "calm": {"id": "calm", "zh": "冷靜地", "pos": "ad.", "syn": ["composedly", "serenely"]}, "social": {"id": "social", "zh": "社交", "pos": "a.", "syn": ["communal", "societal"]}, "appropriate": {"id": "appropriate", "zh": "得體的", "pos": "a.", "syn": ["suitable", "proper"]}, "expect": {"id": "expect", "zh": "期望", "pos": "v.", "syn": ["anticipate", "await"]}, "realize": {"id": "realize", "zh": "意識到", "pos": "v.", "syn": ["recognise", "grasp"]}, "assume": {"id": "assume", "zh": "以為", "pos": "v.", "syn": ["presume", "suppose"]}, "submissive": {"id": "submissive", "zh": "順從的", "pos": "a.", "syn": ["obedient", "compliant"]}, "discover": {"id": "discover", "zh": "發現", "pos": "v.", "syn": ["find out", "uncover"]}, "faded": {"id": "faded", "zh": "褪色的", "pos": "a.", "syn": ["discoloured", "bleached"]}, "radiant": {"id": "radiant", "zh": "燦爛的", "pos": "a.", "syn": ["beaming", "glowing"]}, "inquire": {"id": "inquire", "zh": "詢問", "pos": "v.", "syn": ["ask", "enquire"]}, "withdraw": {"id": "withdraw", "zh": "退出", "pos": "v.", "syn": ["retreat", "retire"]}, "contempt": {"id": "contempt", "zh": "輕蔑", "pos": "n.", "syn": ["scorn", "disdain"]}, "complex": {"id": "complex", "zh": "複雜的", "pos": "a.", "syn": ["complicated", "intricate"]}, "emotion": {"id": "emotion", "zh": "情感", "pos": "n.", "syn": ["feeling", "sentiment"]}, "intelligence": {"id": "intelligence", "zh": "智慧", "pos": "n.", "syn": ["intellect", "brainpower"]}, "diligence": {"id": "diligence", "zh": "勤奮", "pos": "n.", "syn": ["hard work", "industry"]}, "charity": {"id": "charity", "zh": "慈善", "pos": "n.", "syn": ["philanthropy", "benevolence"]}, "position": {"id": "position", "zh": "位置", "pos": "n.", "syn": ["post", "role"]}, "organize": {"id": "organize", "zh": "組織", "pos": "v.", "syn": ["arrange", "coordinate"]}, "spectacular": {"id": "spectacular", "zh": "壯觀的", "pos": "a.", "syn": ["impressive", "dramatic"]}, "raise": {"id": "raise", "zh": "籌集", "pos": "v.", "syn": ["collect", "gather"]}, "substantial": {"id": "substantial", "zh": "大量的", "pos": "a.", "syn": ["considerable", "significant"]}, "admire": {"id": "admire", "zh": "欽佩", "pos": "v.", "syn": ["respect", "esteem"]}, "erupt": {"id": "erupt", "zh": "爆發", "pos": "v.", "syn": ["break out", "burst"]}, "deliberately": {"id": "deliberately", "zh": "蓄意地", "pos": "ad.", "syn": ["intentionally", "purposely"]}, "leak": {"id": "leak", "zh": "洩露", "pos": "v.", "syn": ["disclose", "reveal"]}, "authentic": {"id": "authentic", "zh": "真實", "pos": "a.", "syn": ["genuine", "real"]}, "explode": {"id": "explode", "zh": "爆炸", "pos": "v.", "syn": ["blow up", "burst"]}, "plunge": {"id": "plunge", "zh": "暴跌", "pos": "v.", "syn": ["plummet", "nosedive"]}, "severe": {"id": "severe", "zh": "嚴厲的", "pos": "a.", "syn": ["harsh", "strict"]}, "hesitate": {"id": "hesitate", "zh": "猶豫", "pos": "v.", "syn": ["pause", "waver"]}, "steady": {"id": "steady", "zh": "穩定的", "pos": "a.", "syn": ["stable", "constant"]}, "sincere": {"id": "sincere", "zh": "真誠的", "pos": "a.", "syn": ["honest", "earnest"]}, "mutual": {"id": "mutual", "zh": "相互的", "pos": "a.", "syn": ["reciprocal", "shared"]}, "speculation": {"id": "speculation", "zh": "猜測", "pos": "n.", "syn": ["conjecture", "guesswork"]}, "define": {"id": "define", "zh": "定義", "pos": "v.", "syn": ["specify", "characterise"]}, "courage": {"id": "courage", "zh": "勇氣", "pos": "n.", "syn": ["bravery", "valour"]}, "eloquence": {"id": "eloquence", "zh": "口才", "pos": "n.", "syn": ["fluency", "articulacy"]}, "suppress": {"id": "suppress", "zh": "壓制", "pos": "v.", "syn": ["quell", "subdue"]}, "vulnerable": {"id": "vulnerable", "zh": "脆弱的", "pos": "a.", "syn": ["exposed", "defenceless"]}, "abandon": {"id": "abandon", "zh": "拋棄", "pos": "v.", "syn": ["desert", "forsake"]}, "honor": {"id": "honor", "zh": "信守", "pos": "v.", "syn": ["keep", "fulfil"]}, "gaze": {"id": "gaze", "zh": "凝視", "pos": "v.", "syn": ["stare", "gape"]}, "principle": {"id": "principle", "zh": "原則", "pos": "n.", "syn": ["rule", "belief"]}, "confess": {"id": "confess", "zh": "坦白", "pos": "v.", "syn": ["admit", "disclose"]}, "conspiracy": {"id": "conspiracy", "zh": "陰謀", "pos": "n.", "syn": ["plot", "scheme"]}, "perish": {"id": "perish", "zh": "喪生", "pos": "v.", "syn": ["die", "pass away"]}, "pursue": {"id": "pursue", "zh": "追查", "pos": "v.", "syn": ["chase", "seek"]}, "strategic": {"id": "strategic", "zh": "戰略性的", "pos": "a.", "syn": ["planned", "calculated"]}, "tender": {"id": "tender", "zh": "溫柔的", "pos": "a.", "syn": ["gentle", "affectionate"]}, "transform": {"id": "transform", "zh": "改變", "pos": "v.", "syn": ["change", "convert"]}, "significance": {"id": "significance", "zh": "意義", "pos": "n.", "syn": ["meaning", "importance"]}, "moist": {"id": "moist", "zh": "溼潤的", "pos": "a.", "syn": ["damp", "wet"]}, "comprehend": {"id": "comprehend", "zh": "理解", "pos": "v.", "syn": ["understand", "grasp"]}, "rigid": {"id": "rigid", "zh": "僵硬的", "pos": "a.", "syn": ["stiff", "inflexible"]}, "fragile": {"id": "fragile", "zh": "脆弱的", "pos": "a.", "syn": ["delicate", "breakable"]}, "passionate": {"id": "passionate", "zh": "熱烈的", "pos": "a.", "syn": ["ardent", "fervent"]}, "covenant": {"id": "covenant", "zh": "盟約", "pos": "n.", "syn": ["pledge", "promise"]}, "exquisite": {"id": "exquisite", "zh": "精美的", "pos": "a.", "syn": ["delicate", "beautiful"]}, "contract": {"id": "contract", "zh": "合同", "pos": "n.", "syn": ["agreement", "deal"]}, "obligation": {"id": "obligation", "zh": "義務", "pos": "n.", "syn": ["duty", "commitment"]}, "genuine": {"id": "genuine", "zh": "真誠的", "pos": "a.", "syn": ["authentic", "sincere"]}, "embrace": {"id": "embrace", "zh": "擁抱", "pos": "v.", "syn": ["hug", "hold"]}, "illuminate": {"id": "illuminate", "zh": "照亮", "pos": "v.", "syn": ["light up", "brighten"]}, "transaction": {"id": "transaction", "zh": "交易", "pos": "n.", "syn": ["deal", "exchange"]}, "conclude": {"id": "conclude", "zh": "結束", "pos": "v.", "syn": ["end", "finish"]}, "splendid": {"id": "splendid", "zh": "輝煌的", "pos": "a.", "syn": ["magnificent", "glorious"]}}};</script>
+<script>
+const IC = {
+ book:'<path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/>',
+ repeat:'<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>',
+ notebook:'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 3v18M12 8h4M12 12h4"/>',
+ chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+ vol:'<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>',
+ x:'<path d="M18 6 6 18M6 6l12 12"/>',
+ left:'<path d="m15 18-6-6 6-6"/>',
+ check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'};
+const ico = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
+const D = window.DATA, $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ---------- 儲存（v1：本機 localStorage；之後可換成雲端同步） ---------- */
+const KEY = 'ielts-novel-v1';
+let S = {words: {}, prog: {}, set: {theme: 'light', fs: 18, accent: 'US', limit: 50, hz: false, he: false}, log: []};
+try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); S.set = Object.assign({theme:'light',fs:18,accent:'US',limit:50,hz:false,he:false}, S.set); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+/* ---------- 遺忘曲線（固定階梯，單位：分鐘） ---------- */
+const STEPS = [20, 1440, 2880, 5760, 10080, 21600, 43200]; // 20分,1,2,4,7,15,30天
+const MIN = 60000;
+const uw = id => S.words[id];
+function addWord(id, chId) {
+  if (!S.words[id]) S.words[id] = {inNb: true, stage: 0, due: Date.now() + STEPS[0] * MIN, reviews: 0, lapses: 0, mastered: false, ch: chId, added: Date.now()};
+  else S.words[id].inNb = true;
+  save();
+}
+function rate(id, r, src) { // r: good / hard / again
+  const w = uw(id); if (!w) return;
+  if (r === 'good') { w.stage++; if (w.stage >= STEPS.length) { w.mastered = true; w.stage = STEPS.length - 1; w.due = Date.now() + STEPS[STEPS.length - 1] * MIN; } else w.due = Date.now() + STEPS[w.stage] * MIN; }
+  else if (r === 'hard') w.due = Date.now() + STEPS[Math.max(w.stage, 0)] * MIN;
+  else { w.stage = 1; w.lapses++; w.mastered = false; w.due = Date.now() + STEPS[1] * MIN; }
+  w.reviews++; w.last = Date.now(); w.inNb = true;
+  S.log.push({id, r, src, at: Date.now()}); if (S.log.length > 3000) S.log.shift();
+  save();
+}
+const dueList = () => Object.keys(S.words).filter(id => S.words[id].inNb && !S.words[id].mastered && S.words[id].due <= Date.now()).sort((a, b) => S.words[a].due - S.words[b].due).slice(0, S.set.limit);
+function dueText(w) {
+  if (w.mastered) return '已掌握';
+  const m = (w.due - Date.now()) / MIN;
+  if (m <= 0) return '現在可複習';
+  if (m < 60) return Math.ceil(m) + ' 分鐘後複習';
+  if (m < 1440) return Math.ceil(m / 60) + ' 小時後複習';
+  return Math.ceil(m / 1440) + ' 天後複習';
+}
+/* ---------- 發音 ---------- */
+function say(t) { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = S.set.accent === 'UK' ? 'en-GB' : 'en-US'; u.rate = .9; speechSynthesis.speak(u); } catch (e) {} }
+/* ---------- 工具 ---------- */
+const chapterById = id => D.novels[0].chapters.find(c => c.id === id);
+function contextOf(id, chId, hl = true) { // 該字所在段落（含該章的句子）
+  const ch = chapterById(chId) || D.novels[0].chapters.find(c => c.vocab.includes(id));
+  if (!ch) return '';
+  const p = ch.paras.find(p => p.some(s => s.t === 'word' && s.id === id)); if (!p) return '';
+  const idx = p.findIndex(s => s.t === 'word' && s.id === id);
+  const txt = p.map((s, i) => s.t === 'text' ? esc(s.v) : (i === idx && hl ? `<mark>${esc(s.id)}（${esc(s.zh)}）</mark>` : `${esc(s.id)}（${esc(s.zh)}）`)).join('');
+  // 取以標點切開的句子
+  const plain = txt.split(/(?<=[。！？])/); const hit = plain.find(x => x.includes('<mark>'));
+  return hit ? hit.trim() : txt;
+}
+const chOf = id => (D.novels[0].chapters.find(c => c.vocab.includes(id)) || {}).id;
+/* ---------- 路由 ---------- */
+let view = 'home', cur = {ch: 0, mode: 'read', shuffle: []};
+function go(v, p) { view = v; Object.assign(cur, p || {}); render(); scrollTo(0, 0); }
+function render() {
+  document.documentElement.dataset.theme = S.set.theme;
+  document.documentElement.style.setProperty('--fs', S.set.fs + 'px');
+  const tabs = [['home', 'book', '書架'], ['review', 'repeat', '複習'], ['nb', 'notebook', '生詞本'], ['stats', 'chart', '統計'], ['set', 'gear', '設定']];
+  $('#nav').innerHTML = tabs.map(t => `<button class="${view === t[0] || (view === 'read' && t[0] === 'home') ? 'on' : ''}" onclick="go('${t[0]}')"><b>${ico(t[1])}</b>${t[2]}</button>`).join('');
+  ({home, read, review, nb, stats, set, quiz, toc})[view]();
+}
+/* ---------- 書架 ---------- */
+function home() {
+  const n = D.novels[0], due = dueList().length, p = S.prog[n.id];
+  $('#app').innerHTML = `<h1>雅思小說閱讀</h1><div class="mute">在劇情裡自然記住單字</div>
+  <div class="card row" onclick="go('review')" style="cursor:pointer"><div><b style="font-size:28px;color:var(--acct)">${due}</b> <span>個單字今日待複習</span></div><div class="sp"></div><button class="btn sm">開始複習</button></div>
+  <div class="card"><h2 style="margin-top:0">${esc(n.title)}</h2><div class="mute">${esc(n.desc)}</div>
+  <div class="mute" style="margin:10px 0">共 ${n.chapters.length} 章 · ${Object.keys(D.words).length} 個單字 · 已加入生詞本 ${Object.keys(S.words).length}</div>
+  <div class="row"><button class="btn" onclick="go('read',{ch:${p ? p.ch : 0}})">${p ? '繼續閱讀' : '開始閱讀'}</button><button class="btn ghost" onclick="go('toc')">目錄</button></div></div>`;
+}
+function toc() {
+  const n = D.novels[0];
+  $('#app').innerHTML = `<h1>${esc(n.title)}</h1>` + n.chapters.map((c, i) => {
+    const k = c.vocab.filter(v => uw(v) && uw(v).mastered).length;
+    return `<div class="card" onclick="go('read',{ch:${i}})" style="cursor:pointer"><b>${esc(c.title)}</b><div class="mute">${c.vocab.length} 個單字 · 已掌握 ${k}</div><div class="bar" style="margin-top:8px"><div style="width:${k / c.vocab.length * 100}%"></div></div></div>`;
+  }).join('');
+}
+/* ---------- 閱讀 ---------- */
+function read() {
+  const n = D.novels[0], c = n.chapters[cur.ch]; S.prog[n.id] = {ch: cur.ch, at: Date.now()}; save();
+  const s = S.set;
+  const html = c.paras.map(p => '<p>' + p.map(x => x.t === 'text' ? esc(x.v) : `<span class="w ${s.hz ? 'hz' : ''} ${s.he ? 'he' : ''}" onclick="card('${x.id}')"><span>${esc(x.id)}</span> <i>（${esc(x.zh)}）</i></span>`).join('') + '</p>').join('');
+  $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('toc')">${ico('left')} 目錄</button><span class="mute">第 ${c.index} 章 / 共 ${n.chapters.length} 章</span><div class="sp"></div>
+  <button class="chip" onclick="S.set.fs=Math.max(14,S.set.fs-2);save();render()">A-</button><button class="chip" onclick="S.set.fs=Math.min(30,S.set.fs+2);save();render()">A+</button>
+  <button class="chip" onclick="S.set.theme={light:'sepia',sepia:'dark',dark:'light'}[S.set.theme];save();render()">主題</button></div>
+  <div class="tools"><button class="chip ${s.hz ? 'on' : ''}" onclick="S.set.hz=!S.set.hz;S.set.he=false;save();render()">隱藏中文</button><button class="chip ${s.he ? 'on' : ''}" onclick="S.set.he=!S.set.he;S.set.hz=false;save();render()">隱藏英文</button></div>
+  <h1>${esc(c.title)}</h1><div class="read card">${html}</div>
+  <div class="row"><button class="btn" onclick="cardSeq(0)">本章詞卡連刷（${c.vocab.length}）</button><button class="btn ghost" onclick="go('quiz',{mode:'zh',scope:'ch'})">默寫自測</button><div class="sp"></div>
+  <button class="btn ghost sm" ${cur.ch ? '' : 'disabled'} onclick="go('read',{ch:cur.ch-1})">上一章</button><button class="btn ghost sm" ${cur.ch < n.chapters.length - 1 ? '' : 'disabled'} onclick="go('read',{ch:cur.ch+1})">下一章</button></div>`;
+}
+/* ---------- 詞卡 ---------- */
+let seq = null;
+function cardSeq(i) { seq = D.novels[0].chapters[cur.ch].vocab; card(seq[i], i); }
+function card(id, i) {
+  const w = D.words[id], u = uw(id), ch = chapterById(chOf(id));
+  const idx = seq && i != null ? i : (seq = null, -1);
+  $('#sheet').innerHTML = `<div class="row"><span class="mute">${idx >= 0 ? `#${idx + 1} · 第 ${idx + 1} / ${seq.length} 個詞` : `本章第 ${ch.vocab.indexOf(id) + 1} / ${ch.vocab.length} 個詞`}</span><div class="sp"></div><button class="chip" onclick="closeSheet()">${ico('x')}</button></div>
+  <div style="margin:8px 0"><span class="hw">${esc(w.id)}</span><span class="pos">${esc(w.pos)}</span></div>
+  <div class="row"><button class="btn sm ghost" onclick="say('${w.id}')">${ico('vol')} ${S.set.accent === 'UK' ? '英式' : '美式'}發音</button></div>
+  <div style="font-size:20px;margin:12px 0">${esc(w.zh)}</div>
+  ${w.syn.length ? `<div class="mute">雅思同義替換</div><div>${w.syn.map(s => `<span class="syn" onclick="say('${esc(s)}')">${esc(s)} ${ico('vol')}</span>`).join('')}</div>` : ''}
+  <div class="mute" style="margin-top:10px">故事語境</div><div class="ctx">${contextOf(id, ch.id)}</div>
+  <div class="mute">出處：${esc(ch.title)}</div>
+  <div class="mute" style="margin:6px 0">${u && u.inNb ? ico('notebook') + ' 在生詞本 · ' + dueText(u) : '尚未加入生詞本'}</div>
+  <div class="row" style="margin-top:8px"><button class="btn" onclick="know('${id}',1)">記得</button><button class="btn ghost" onclick="know('${id}',0)">沒記住</button>
+  ${idx >= 0 ? `<div class="sp"></div><button class="btn sm ghost" ${idx ? '' : 'disabled'} onclick="card(seq[${idx - 1}],${idx - 1})">上一個</button><button class="btn sm ghost" ${idx < seq.length - 1 ? '' : 'disabled'} onclick="card(seq[${idx + 1}],${idx + 1})">下一個</button>` : ''}</div>`;
+  $('#ov').classList.add('show'); say(w.id);
+}
+function know(id, ok) {
+  const ch = chOf(id);
+  if (ok) { if (uw(id)) rate(id, 'good', 'card'); } else { addWord(id, ch); }
+  const n = seq && seq.indexOf(id);
+  if (seq && n < seq.length - 1) card(seq[n + 1], n + 1); else closeSheet();
+}
+function closeSheet() { $('#ov').classList.remove('show'); seq = null; if (view !== 'read') render(); }
+$('#ov').addEventListener('click', e => { if (e.target.id === 'ov') closeSheet(); });
+/* ---------- 複習 ---------- */
+let rv = null;
+function review() {
+  if (!rv) rv = {list: dueList(), i: 0, flip: false, rev: false, done: 0};
+  const el = $('#app');
+  if (rv.i >= rv.list.length) {
+    el.innerHTML = `<h1>複習</h1><div class="card" style="text-align:center"><div style="font-size:40px;color:var(--acct)">${ico('check')}</div><p>${rv.list.length ? `本次複習完成，共 ${rv.done} 個` : '目前沒有待複習的單字'}</p><p class="mute">讀小說時點「沒記住」的字會自動排進遺忘曲線。</p><button class="btn" onclick="rv=null;go('home')">回書架</button></div>`; return;
+  }
+  const id = rv.list[rv.i], w = D.words[id], u = uw(id);
+  const front = rv.rev ? `<div class="big">${esc(w.zh)}</div>` : `<div class="big">${esc(id)}</div><div style="text-align:center"><button class="btn sm ghost" onclick="say('${id}')">${ico('vol')} 發音</button></div>`;
+  el.innerHTML = `<div class="row"><h1 style="margin:0">複習</h1><div class="sp"></div><span class="mute">${rv.i + 1} / ${rv.list.length}</span><button class="chip ${rv.rev ? 'on' : ''}" onclick="rv.rev=!rv.rev;rv.flip=false;render()">看中文想英文</button></div>
+  <div class="bar" style="margin:10px 0"><div style="width:${rv.i / rv.list.length * 100}%"></div></div>
+  <div class="card" style="min-height:300px">${front}${rv.flip ? `<hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+    <div style="font-size:${rv.rev ? 28 : 20}px;text-align:center;font-weight:${rv.rev ? 700 : 400}">${rv.rev ? esc(id) : esc(w.zh)}<span class="pos">${esc(w.pos)}</span></div>
+    ${w.syn.length ? `<div style="text-align:center;margin:8px 0">${w.syn.map(s => `<span class="syn">${esc(s)}</span>`).join('')}</div>` : ''}
+    <div class="ctx">${contextOf(id, u.ch)}</div><div class="mute" style="text-align:center">階段 ${u.stage + 1}/7 · 遺忘 ${u.lapses} 次</div>` : ''}</div>
+  ${rv.flip ? `<div class="row"><button class="btn ghost sp" onclick="rvRate('again')">忘了</button><button class="btn ghost sp" onclick="rvRate('hard')">模糊</button><button class="btn sp" onclick="rvRate('good')">記得</button></div>` : `<button class="btn" style="width:100%" onclick="rv.flip=true;render()">翻面</button>`}`;
+}
+function rvRate(r) { rate(rv.list[rv.i], r, 'review'); rv.i++; rv.done++; rv.flip = false; render(); }
+/* ---------- 生詞本 ---------- */
+let nbf = {f: 'all', sort: 'added'};
+function nb() {
+  const ids = Object.keys(S.words).filter(id => S.words[id].inNb).filter(id => { const u = S.words[id]; return nbf.f === 'all' || (nbf.f === 'learn' && !u.mastered) || (nbf.f === 'done' && u.mastered) || (nbf.f === 'hard' && u.lapses >= 2); });
+  const ch = id => chapterById(chOf(id)).index;
+  ids.sort((a, b) => nbf.sort === 'az' ? a.localeCompare(b) : nbf.sort === 'ch' ? Object.keys(D.words).indexOf(a) - Object.keys(D.words).indexOf(b) : nbf.sort === 'due' ? S.words[a].due - S.words[b].due : S.words[b].added - S.words[a].added);
+  $('#app').innerHTML = `<h1>生詞本 <span class="mute">${ids.length} 個</span></h1>
+  <div class="tools">${[['all', '全部'], ['learn', '複習中'], ['done', '已掌握'], ['hard', '難詞']].map(t => `<button class="chip ${nbf.f === t[0] ? 'on' : ''}" onclick="nbf.f='${t[0]}';render()">${t[1]}</button>`).join('')}
+  <select onchange="nbf.sort=this.value;render()">${[['added', '最近加入'], ['az', 'A-Z'], ['ch', '章節順序'], ['due', '下次複習時間']].map(t => `<option value="${t[0]}" ${nbf.sort === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></div>
+  ${ids.length ? `<div class="grid">${ids.map(id => { const u = S.words[id], w = D.words[id]; return `<div class="card" style="margin:0"><div class="row"><b style="font-size:18px">${esc(id)}</b><span class="pos">${esc(w.pos)}</span><div class="sp"></div><button class="chip" onclick="say('${id}')">${ico('vol')}</button></div><div>${esc(w.zh)}</div><div class="mute" style="margin:4px 0">${esc(w.syn.join(' ≈ '))}</div><div class="ctx" style="font-size:13px">${contextOf(id, u.ch)}</div><div class="row"><span class="tag">${dueText(u)}</span>${u.lapses >= 2 ? '<span class="tag">難詞</span>' : ''}<div class="sp"></div><button class="chip" onclick="S.words['${id}'].mastered=!S.words['${id}'].mastered;save();render()">${u.mastered ? '取消掌握' : '標記掌握'}</button><button class="chip" onclick="S.words['${id}'].inNb=false;save();render()">移出</button></div></div>`; }).join('')}</div>` : '<div class="card mute">還沒有生詞。閱讀時點單字，按「沒記住」就會收進來。</div>'}`;
+}
+/* ---------- 默寫 ---------- */
+function quiz() {
+  const c = D.novels[0].chapters[cur.ch];
+  let ids = c.vocab;
+  if (cur.scope === 'nb') ids = Object.keys(S.words).filter(id => S.words[id].inNb);
+  if (cur.scope === 'due') ids = dueList();
+  if (!cur.shuffle.length || cur.shuffleKey !== cur.scope + cur.ch) { cur.shuffle = ids.slice().sort(() => Math.random() - .5); cur.shuffleKey = cur.scope + cur.ch; cur.ans = {}; }
+  const set = new Set(cur.shuffle), done = Object.keys(cur.ans).length, ok = Object.values(cur.ans).filter(Boolean).length;
+  const zh = cur.mode === 'zh';
+  const html = c.paras.map(p => '<p>' + p.map(x => {
+    if (x.t === 'text') return esc(x.v);
+    if (!set.has(x.id)) return `${esc(x.id)}（${esc(x.zh)}）`;
+    const a = cur.ans[x.id], cls = a === undefined ? '' : a ? 'ok' : 'no';
+    return zh ? `${esc(x.id)}（<input class="quiz-in ${cls}" data-id="${x.id}" ${a !== undefined ? 'value="' + esc(a ? x.zh : '') + '"' : ''} onchange="chk(this)" placeholder="＿＿">）`
+              : `<input class="quiz-in ${cls}" data-id="${x.id}" style="width:110px" onchange="chk(this)" placeholder="＿＿">（${esc(x.zh)}）`;
+  }).join('') + '</p>').join('');
+  $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('read',{ch:${cur.ch}})">${ico('left')} 返回閱讀</button><div class="sp"></div><span class="mute">已答 ${done}/${cur.shuffle.length} · 正確 ${ok}</span></div><h1>默寫自測</h1>
+  <div class="tools">${[['zh', '給英文寫中文'], ['en', '給中文寫英文']].map(t => `<button class="chip ${cur.mode === t[0] ? 'on' : ''}" onclick="cur.mode='${t[0]}';cur.shuffle=[];render()">${t[1]}</button>`).join('')}
+  ${[['ch', '本章全部'], ['nb', '只考生詞本'], ['due', '只考待複習']].map(t => `<button class="chip ${cur.scope === t[0] ? 'on' : ''}" onclick="cur.scope='${t[0]}';render()">${t[1]}</button>`).join('')}
+  <button class="chip" onclick="cur.shuffle=[];render()">清空重考</button></div>
+  <div class="read card">${html}</div><div class="mute">輸入後按 Enter 或點別處即判分。答對算「記得」，答錯算「忘了」並加入生詞本。</div>`;
+}
+function chk(el) {
+  const id = el.dataset.id, w = D.words[id], v = el.value.trim(); if (!v || cur.ans[id] !== undefined) return;
+  const ok = cur.mode === 'zh' ? v.length >= 1 && (w.zh.includes(v) || v.includes(w.zh.replace(/[的地]$/, ''))) : v.toLowerCase() === id;
+  cur.ans[id] = ok; addWord(id, chOf(id)); rate(id, ok ? 'good' : 'again', 'quiz');
+  el.classList.add(ok ? 'ok' : 'no'); if (!ok) el.value = (cur.mode === 'zh' ? w.zh : id) + ' ✗';
+  const st = document.querySelector('.row .mute'); if (st) st.textContent = `已答 ${Object.keys(cur.ans).length}/${cur.shuffle.length} · 正確 ${Object.values(cur.ans).filter(Boolean).length}`;
+}
+/* ---------- 統計 / 設定 ---------- */
+function stats() {
+  const all = Object.values(S.words), t0 = new Date().setHours(0, 0, 0, 0), today = S.log.filter(l => l.at >= t0);
+  const days = new Set(S.log.map(l => new Date(l.at).toDateString())); let streak = 0;
+  for (let d = new Date(); days.has(d.toDateString()); d.setDate(d.getDate() - 1)) streak++;
+  const box = (n, l) => `<div class="card" style="text-align:center;margin:0"><div style="font-size:28px;font-weight:700;color:var(--acct)">${n}</div><div class="mute">${l}</div></div>`;
+  $('#app').innerHTML = `<h1>學習統計</h1><div class="grid" style="grid-template-columns:repeat(2,1fr)">${box(today.length, '今日複習/自測次數')}${box(streak, '連續學習天數')}${box(all.filter(u => u.inNb).length, '生詞本單字')}${box(all.filter(u => u.mastered).length, '已掌握')}${box(all.filter(u => u.lapses >= 2).length, '難詞')}${box(dueList().length, '待複習')}</div>
+  <h2>全書掌握率</h2><div class="bar"><div style="width:${all.filter(u => u.mastered).length / Object.keys(D.words).length * 100}%"></div></div><div class="mute">${all.filter(u => u.mastered).length} / ${Object.keys(D.words).length}</div>`;
+}
+function set() {
+  const s = S.set;
+  $('#app').innerHTML = `<h1>設定</h1><div class="card">
+  <p>發音：<select onchange="S.set.accent=this.value;save()"><option value="US" ${s.accent === 'US' ? 'selected' : ''}>美式</option><option value="UK" ${s.accent === 'UK' ? 'selected' : ''}>英式</option></select></p>
+  <p>主題：<select onchange="S.set.theme=this.value;save();render()">${[['light', '淺色'], ['sepia', '米色護眼'], ['dark', '深色']].map(t => `<option value="${t[0]}" ${s.theme === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></p>
+  <p>每日複習上限：<select onchange="S.set.limit=+this.value;save()">${[20, 50, 100, 200].map(n => `<option ${s.limit === n ? 'selected' : ''}>${n}</option>`).join('')}</select></p></div>
+  <div class="card"><div class="mute">學習紀錄目前存在這台裝置的瀏覽器中。可匯出備份，換裝置時匯入。</div><div class="row" style="margin-top:8px"><button class="btn sm" onclick="exp()">匯出備份</button><button class="btn sm ghost" onclick="imp()">匯入備份</button><button class="btn sm ghost" onclick="if(confirm('確定清除所有學習紀錄？')){S.words={};S.prog={};S.log=[];save();render()}">清除紀錄</button></div></div>`;
+}
+function exp() { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(S)], {type: 'application/json'})); a.download = 'ielts-novel-backup.json'; a.click(); }
+function imp() { const i = document.createElement('input'); i.type = 'file'; i.accept = '.json'; i.onchange = () => i.files[0].text().then(t => { try { S = Object.assign(S, JSON.parse(t)); save(); render(); } catch (e) { alert('檔案格式不正確'); } }); i.click(); }
+render();
+</script>
+</body>
+</html>
