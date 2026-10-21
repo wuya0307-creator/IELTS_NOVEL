@@ -50,12 +50,33 @@ nav button.on{color:var(--acct);font-weight:700}nav b{display:block;height:24px}
 .pf{cursor:pointer;width:110px;color:var(--mute)}.pf:hover{color:var(--fg)}.pf:hover .av{border-color:var(--acc)}
 .av{width:110px;height:110px;border-radius:18px;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;color:#fff;background:hsl(var(--h) 45% 42%);margin-bottom:8px}
 .av.add{background:transparent;border:2px dashed var(--line);color:var(--mute)}.av.add svg{width:44px;height:44px}
+.rin{border:0;border-bottom:2px solid var(--acc);background:transparent;font:inherit;color:var(--fg);text-align:center;padding:0;margin:0 2px;min-width:2em}
+.rin:focus{outline:0;background:var(--accbg)}
+.okc{color:#3a9d5d;font-style:normal;font-weight:600}.noc{color:#d9534f;font-style:normal;font-weight:600}
+#wb{display:none;position:fixed;z-index:6;background:var(--card);border:1px solid var(--line);flex-direction:column}
+body.wb-open #wb{display:flex}
+#wb .wbh{display:flex;gap:6px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+#wb .sw{width:22px;height:22px;border-radius:50%;border:2px solid transparent;padding:0}
+#wb .sw.on{border-color:var(--acct);outline:2px solid var(--card);outline-offset:-4px}
+#wbc{flex:1;width:100%;min-height:0;touch-action:none;cursor:crosshair;background-color:#fffef9;background-image:repeating-linear-gradient(transparent 0 31px,#e6e9ef 31px 32px)}
+@media(min-width:900px){#wb{top:0;right:0;bottom:0;width:min(42vw,440px);border-width:0 0 0 1px}body.wb-open #app{margin:0;padding-left:28px;max-width:min(760px,calc(100vw - min(42vw,440px)))}}
+@media(max-width:899px){#wb{left:0;right:0;bottom:0;height:46vh;border-width:1px 0 0}body.wb-open #app{padding-bottom:calc(46vh + 20px)}}
 select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:5px}
 </style>
 </head>
 <body>
 <div id="app"></div>
 <nav id="nav"></nav>
+<div id="wb"><div class="wbh">
+  <button class="sw" data-c="#1f2733" style="background:#1f2733" onclick="wbPick('#1f2733')" aria-label="黑筆"></button>
+  <button class="sw" data-c="#2f6fd6" style="background:#2f6fd6" onclick="wbPick('#2f6fd6')" aria-label="藍筆"></button>
+  <button class="sw" data-c="#d9534f" style="background:#d9534f" onclick="wbPick('#d9534f')" aria-label="紅筆"></button>
+  <button class="chip" id="wbe" onclick="wbPick('eraser')" aria-label="橡皮擦"></button>
+  <span class="sp"></span>
+  <button class="chip" id="wbu" onclick="wbUndo()" aria-label="復原"></button>
+  <button class="chip" id="wbt" onclick="wbClear()" aria-label="清除"></button>
+  <button class="chip" id="wbx" onclick="wbToggle()" aria-label="收起"></button>
+</div><canvas id="wbc"></canvas></div>
 <div id="ov"><div id="sheet"></div></div>
 <script src="config.js"></script>
 <script src="data.js"></script>
@@ -70,6 +91,10 @@ const IC = {
  x:'<path d="M18 6 6 18M6 6l12 12"/>',
  left:'<path d="m15 18-6-6 6-6"/>',
  check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+ eraser:'<path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7M5 11l9 9"/>',
+ undo:'<path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/>',
+ trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/>',
  star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'};
 const ico = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
 const D = window.DATA, $ = s => document.querySelector(s);
@@ -172,15 +197,35 @@ function contextOf(id, chId, hl = true) { // 該字所在段落（含該章的�
 }
 const chOf = id => (D.novels[0].chapters.find(c => c.vocab.includes(id)) || {}).id;
 /* ---------- 路由 ---------- */
+let rd = {}; // 閱讀頁填空作答：{單字id: 對/錯}（僅練習，不影響複習排程）
+const rstat = () => `已答 ${Object.keys(rd).length} · 正確 ${Object.values(rd).filter(Boolean).length}`;
+function wordHtml(x) {
+  const s = S.set, a = rd[x.id], cls = a === undefined ? '' : a ? 'okc' : 'noc', id = esc(x.id), zh = esc(x.zh);
+  const open = `onclick="card('${x.id}')"`;
+  if (s.hz) { const n = [...x.zh].length; // 隱藏中文：英文（＿＿＿）
+    return `<span class="w"><span ${open}>${id}</span>（${a === undefined ? `<input class="rin" data-id="${id}" style="width:${n * 1.05 + .6}em" placeholder="${'_'.repeat(n)}" autocomplete="off" autocapitalize="off" onchange="rchk(this)">` : `<i class="${cls}">${zh}</i>`}）</span>`; }
+  if (s.he) { const n = x.id.length; // 隱藏英文：＿＿＿（中文）
+    return `<span class="w">${a === undefined ? `<input class="rin" data-id="${id}" style="width:${n * .62 + .8}em" placeholder="${'_'.repeat(n)}" autocomplete="off" autocapitalize="off" spellcheck="false" onchange="rchk(this)">` : `<span class="${cls}" ${open}>${id}</span>`}<i>（${zh}）</i></span>`; }
+  return `<span class="w" ${open}><span>${id}</span> <i>（${zh}）</i></span>`;
+}
+function rchk(el) {
+  const id = el.dataset.id, w = D.words[id], v = el.value.trim(); if (!v || rd[id] !== undefined) return;
+  const ok = S.set.hz ? okZh(v, w.zh) : v.toLowerCase() === id.toLowerCase(); rd[id] = ok;
+  const cls = ok ? 'okc' : 'noc';
+  el.outerHTML = S.set.hz ? `<i class="${cls}">${esc(w.zh)}</i>` : `<span class="${cls}" onclick="card('${id}')">${esc(id)}</span>`;
+  const e = document.getElementById('rstat'); if (e) e.textContent = rstat();
+}
 let view = 'home', cur = {ch: 0, mode: 'read', shuffle: []};
-function go(v, p) { view = v; Object.assign(cur, p || {}); render(); scrollTo(0, 0); }
+function go(v, p) { rd = {}; view = v; Object.assign(cur, p || {}); render(); scrollTo(0, 0); }
 function render() {
+  document.body.classList.toggle('wb-open', !!(wbOpen && PROF && view === 'read'));
   if (!PROF) return picker();
   document.documentElement.dataset.theme = S.set.theme;
   document.documentElement.style.setProperty('--fs', S.set.fs + 'px');
   const tabs = [['home', 'book', '書架'], ['review', 'repeat', '複習'], ['nb', 'notebook', '生詞本'], ['stats', 'chart', '統計'], ['set', 'gear', '設定']];
   $('#nav').innerHTML = tabs.map(t => `<button class="${view === t[0] || (view === 'read' && t[0] === 'home') ? 'on' : ''}" onclick="go('${t[0]}')"><b>${ico(t[1])}</b>${t[2]}</button>`).join('');
   ({home, read, review, nb, stats, set, quiz, toc})[view]();
+  wbSync();
 }
 /* ---------- 書架 ---------- */
 function home() {
@@ -202,11 +247,13 @@ function toc() {
 function read() {
   const n = D.novels[0], c = n.chapters[cur.ch]; S.prog[n.id] = {ch: cur.ch, at: Date.now()}; save();
   const s = S.set;
-  const html = c.paras.map(p => '<p>' + p.map(x => x.t === 'text' ? esc(x.v) : `<span class="w ${s.hz ? 'hz' : ''} ${s.he ? 'he' : ''}" onclick="card('${x.id}')"><span>${esc(x.id)}</span> <i>（${esc(x.zh)}）</i></span>`).join('') + '</p>').join('');
+  const html = c.paras.map(p => '<p>' + p.map(x => x.t === 'text' ? esc(x.v) : wordHtml(x)).join('') + '</p>').join('');
   $('#app').innerHTML = `<div class="row"><button class="chip" onclick="go('toc')">${ico('left')} 目錄</button><span class="mute">第 ${c.index} 章 / 共 ${n.chapters.length} 章</span><div class="sp"></div>
   <button class="chip" onclick="S.set.fs=Math.max(14,S.set.fs-2);save();render()">A-</button><button class="chip" onclick="S.set.fs=Math.min(30,S.set.fs+2);save();render()">A+</button>
   <button class="chip" onclick="S.set.theme={light:'sepia',sepia:'dark',dark:'light'}[S.set.theme];save();render()">主題</button></div>
-  <div class="tools"><button class="chip ${s.hz ? 'on' : ''}" onclick="S.set.hz=!S.set.hz;S.set.he=false;save();render()">隱藏中文</button><button class="chip ${s.he ? 'on' : ''}" onclick="S.set.he=!S.set.he;S.set.hz=false;save();render()">隱藏英文</button></div>
+  <div class="tools"><button class="chip ${s.hz ? 'on' : ''}" onclick="rd={};S.set.hz=!S.set.hz;S.set.he=false;save();render()">隱藏中文</button><button class="chip ${s.he ? 'on' : ''}" onclick="rd={};S.set.he=!S.set.he;S.set.hz=false;save();render()">隱藏英文</button>
+  <button class="chip ${wbOpen ? 'on' : ''}" onclick="wbToggle()">${ico('pen')} 白板</button>
+  ${s.hz || s.he ? `<span class="mute" id="rstat">${rstat()}</span><button class="chip" onclick="rd={};render()">清空作答</button>` : ''}</div>
   <h1>${esc(c.title)}</h1><div class="read card">${html}</div>
   <div class="row"><button class="btn" onclick="cardSeq(0)">本章詞卡連刷（${c.vocab.length}）</button><button class="btn ghost" onclick="go('quiz',{mode:'zh',scope:'ch'})">默寫自測</button><div class="sp"></div>
   <button class="btn ghost sm" ${cur.ch ? '' : 'disabled'} onclick="go('read',{ch:cur.ch-1})">上一章</button><button class="btn ghost sm" ${cur.ch < n.chapters.length - 1 ? '' : 'disabled'} onclick="go('read',{ch:cur.ch+1})">下一章</button></div>`;
@@ -289,9 +336,11 @@ function quiz() {
   <button class="chip" onclick="cur.shuffle=[];render()">清空重考</button></div>
   <div class="read card">${html}</div><div class="mute">輸入後按 Enter 或點別處即判分。答對算「記得」，答錯算「忘了」並加入生詞本。</div>`;
 }
+const zcore = z => z.replace(/[的地]$/, '');
+function okZh(v, zh) { const c = zcore(zh), u = zcore(v); return u === c || (u.length >= 2 && (c.includes(u) || (c.length >= 2 && u.includes(c)))); }
 function chk(el) {
   const id = el.dataset.id, w = D.words[id], v = el.value.trim(); if (!v || cur.ans[id] !== undefined) return;
-  const ok = cur.mode === 'zh' ? v.length >= 1 && (w.zh.includes(v) || v.includes(w.zh.replace(/[的地]$/, ''))) : v.toLowerCase() === id;
+  const ok = cur.mode === 'zh' ? okZh(v, w.zh) : v.toLowerCase() === id;
   cur.ans[id] = ok; addWord(id, chOf(id)); rate(id, ok ? 'good' : 'again', 'quiz');
   el.classList.add(ok ? 'ok' : 'no'); if (!ok) el.value = (cur.mode === 'zh' ? w.zh : id) + ' ✗';
   const st = document.querySelector('.row .mute'); if (st) st.textContent = `已答 ${Object.keys(cur.ans).length}/${cur.shuffle.length} · 正確 ${Object.values(cur.ans).filter(Boolean).length}`;
@@ -315,6 +364,39 @@ function set() {
 }
 function exp() { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(S)], {type: 'application/json'})); a.download = 'ielts-novel-backup.json'; a.click(); }
 function imp() { const i = document.createElement('input'); i.type = 'file'; i.accept = '.json'; i.onchange = () => i.files[0].text().then(t => { try { S = Object.assign(S, JSON.parse(t)); save(); render(); } catch (e) { alert('檔案格式不正確'); } }); i.click(); }
+/* ---------- 小白板（筆跡以比例座標存本機，每章一份；不上傳雲端） ---------- */
+let wbOpen = false, wbStrokes = [], wbKey = '', wbDraw = null, wbColor = '#1f2733', wbEr = false;
+$('#wbe').innerHTML = ico('eraser'); $('#wbu').innerHTML = ico('undo'); $('#wbt').innerHTML = ico('trash'); $('#wbx').innerHTML = ico('x');
+function wbToggle() { wbOpen = !wbOpen; render(); }
+function wbPick(c) { wbEr = c === 'eraser'; if (!wbEr) wbColor = c; wbMarks(); }
+function wbMarks() { document.querySelectorAll('#wb .sw').forEach(b => b.classList.toggle('on', !wbEr && b.dataset.c === wbColor)); $('#wbe').classList.toggle('on', wbEr); }
+function wbSync() {
+  if (!document.body.classList.contains('wb-open')) return;
+  const c = $('#wbc'), r = c.getBoundingClientRect(); if (!r.width) return;
+  const key = 'ielts-board:' + PROF + ':' + D.novels[0].chapters[cur.ch].id, d = window.devicePixelRatio || 1;
+  if (key !== wbKey) { wbKey = key; try { wbStrokes = JSON.parse(lsGet(key) || '[]'); } catch (e) { wbStrokes = []; } }
+  c.width = Math.round(r.width * d); c.height = Math.round(r.height * d); wbRedraw(); wbMarks();
+}
+function wbSeg(ctx, st, W, from) {
+  ctx.lineCap = ctx.lineJoin = 'round'; ctx.globalCompositeOperation = st.e ? 'destination-out' : 'source-over';
+  ctx.strokeStyle = st.c; ctx.lineWidth = st.w * W; ctx.beginPath();
+  const p = st.p, a = p[from] || p[0]; ctx.moveTo(a[0] * W, a[1] * W);
+  if (p.length === 1) ctx.lineTo(a[0] * W + .01, a[1] * W);
+  for (let i = from + 1; i < p.length; i++) ctx.lineTo(p[i][0] * W, p[i][1] * W);
+  ctx.stroke();
+}
+function wbRedraw() { const c = $('#wbc'), x = c.getContext('2d'); x.clearRect(0, 0, c.width, c.height); wbStrokes.forEach(st => wbSeg(x, st, c.width, 0)); }
+const wbSave = () => lsSet(wbKey, JSON.stringify(wbStrokes));
+function wbUndo() { wbStrokes.pop(); wbSave(); wbRedraw(); }
+function wbClear() { if (wbStrokes.length && confirm('清除這一章的白板？')) { wbStrokes = []; wbSave(); wbRedraw(); } }
+(function () {
+  const c = $('#wbc'), pt = e => { const r = c.getBoundingClientRect(); return [+((e.clientX - r.left) / r.width).toFixed(4), +((e.clientY - r.top) / r.width).toFixed(4)]; };
+  c.addEventListener('pointerdown', e => { e.preventDefault(); c.setPointerCapture(e.pointerId); wbDraw = {c: wbEr ? '#000' : wbColor, e: wbEr, w: wbEr ? .035 : .006, p: [pt(e)]}; wbSeg(c.getContext('2d'), wbDraw, c.width, 0); });
+  c.addEventListener('pointermove', e => { if (!wbDraw) return; const n = wbDraw.p.length; wbDraw.p.push(pt(e)); wbSeg(c.getContext('2d'), wbDraw, c.width, n - 1); });
+  const end = () => { if (wbDraw) { wbStrokes.push(wbDraw); wbDraw = null; wbSave(); } };
+  c.addEventListener('pointerup', end); c.addEventListener('pointercancel', end);
+  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { document.body.classList.toggle('wb-open', !!(wbOpen && PROF && view === 'read')); wbSync(); }, 150); });
+})();
 loadRemoteNames();
 render();
 </script>
