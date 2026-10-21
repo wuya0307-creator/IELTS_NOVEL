@@ -47,6 +47,9 @@ nav button.on{color:var(--acct);font-weight:700}nav b{display:block;height:24px}
 .big{font-size:34px;font-weight:700;text-align:center;margin:30px 0 10px}
 .grid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.bar>div{height:100%;background:var(--acc)}
+.pf{cursor:pointer;width:110px;color:var(--mute)}.pf:hover{color:var(--fg)}.pf:hover .av{border-color:var(--acc)}
+.av{width:110px;height:110px;border-radius:18px;border:2px solid transparent;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;color:#fff;background:hsl(var(--h) 45% 42%);margin-bottom:8px}
+.av.add{background:transparent;border:2px dashed var(--line);color:var(--mute)}.av.add svg{width:44px;height:44px}
 select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:5px}
 </style>
 </head>
@@ -54,6 +57,7 @@ select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(
 <div id="app"></div>
 <nav id="nav"></nav>
 <div id="ov"><div id="sheet"></div></div>
+<script src="config.js"></script>
 <script src="data.js"></script>
 <script>
 const IC = {
@@ -70,11 +74,61 @@ const IC = {
 const ico = n => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
 const D = window.DATA, $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-/* ---------- 儲存（v1：本機 localStorage；之後可換成雲端同步） ---------- */
-const KEY = 'ielts-novel-v1';
-let S = {words: {}, prog: {}, set: {theme: 'light', fs: 18, accent: 'US', limit: 50, hz: false, he: false}, log: []};
-try { S = Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); S.set = Object.assign({theme:'light',fs:18,accent:'US',limit:50,hz:false,he:false}, S.set); } catch (e) {}
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+/* ---------- 使用者 / 儲存 / 雲端同步（Firestore REST，免登入） ---------- */
+const CFG = window.SYNC_CONFIG || {}, SYNC_ON = !!(CFG.projectId && CFG.apiKey);
+const FS = `https://firestore.googleapis.com/v1/projects/${CFG.projectId}/databases/(default)/documents/users`;
+const DEF = () => ({words: {}, prog: {}, set: {theme: 'light', fs: 18, accent: 'US', limit: 50, hz: false, he: false}, log: [], updatedAt: 0});
+let S = DEF(), PROF = null, syncState = SYNC_ON ? 'idle' : 'off', pushT = null;
+const pkey = n => 'ielts-novel-v2:' + n;
+const norm = o => { const d = DEF(); return Object.assign(d, o, {set: Object.assign(d.set, (o || {}).set)}); };
+const lsGet = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+function profiles() { try { const l = JSON.parse(lsGet('ielts-profiles') || 'null'); if (l && l.length) return l; } catch (e) {} return ['HCW']; }
+function setProfiles(l) { lsSet('ielts-profiles', JSON.stringify([...new Set(l)])); }
+(function migrate() { const old = lsGet('ielts-novel-v1'); if (old && !lsGet(pkey('HCW'))) lsSet(pkey('HCW'), old); })();
+function loadLocal(n) { try { const o = JSON.parse(lsGet(pkey(n)) || 'null'); if (o) return norm(o); } catch (e) {} return DEF(); }
+const save = () => { S.updatedAt = Date.now(); lsSet(pkey(PROF), JSON.stringify(S)); schedulePush(); };
+const url = (n, q = '') => `${FS}${n ? '/' + encodeURIComponent(n) : ''}?key=${CFG.apiKey}${q}`;
+async function fsGet(n) { const r = await fetch(url(n)); if (r.status === 404) return null; if (!r.ok) throw r.status; const j = await r.json(); return norm(JSON.parse(j.fields.data.stringValue)); }
+async function fsPut(n, o) { const r = await fetch(url(n, '&updateMask.fieldPaths=data&updateMask.fieldPaths=updatedAt'), {method: 'PATCH', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({fields: {data: {stringValue: JSON.stringify(o)}, updatedAt: {integerValue: String(o.updatedAt)}}})}); if (!r.ok) throw r.status; }
+async function fsList() { const r = await fetch(url('', '&pageSize=100')); if (!r.ok) throw r.status; const j = await r.json(); return (j.documents || []).map(d => decodeURIComponent(d.name.split('/').pop())); }
+async function fsDel(n) { await fetch(url(n), {method: 'DELETE'}); }
+function mark(st) { syncState = st; const e = document.getElementById('sync'); if (e) e.textContent = syncText(); }
+const syncText = () => ({off: '僅存在這台裝置（尚未設定雲端同步）', idle: '雲端同步已開啟', syncing: '同步中…', ok: '已同步到雲端', err: '同步失敗，將稍後重試（資料仍保存在本機）'}[syncState]);
+function schedulePush() { if (!SYNC_ON || !PROF) return; clearTimeout(pushT); mark('syncing'); pushT = setTimeout(push, 1500); }
+async function push() { if (!SYNC_ON || !PROF) return; clearTimeout(pushT); pushT = null; try { await fsPut(PROF, S); mark('ok'); } catch (e) { mark('err'); } }
+async function pull() {
+  if (!SYNC_ON || !PROF || pushT) return; const me = PROF;
+  try {
+    mark('syncing'); const r = await fsGet(me); if (me !== PROF) return;
+    if (r && r.updatedAt > S.updatedAt) { S = r; lsSet(pkey(me), JSON.stringify(S)); mark('ok'); render(); }
+    else { if (!r || r.updatedAt < S.updatedAt) await fsPut(me, S); mark('ok'); }
+  } catch (e) { mark('err'); }
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) push(); else pull(); });
+function pickUser(n) { PROF = n; S = loadLocal(n); view = 'home'; cur = {ch: 0, mode: 'read', shuffle: []}; rv = null; render(); pull(); }
+function switchUser() { push(); PROF = null; render(); }
+function addUser() {
+  const n = (prompt('新使用者名稱（例如 HCW）') || '').trim().slice(0, 20); if (!n) return;
+  if (/[\/\\]/.test(n)) return alert('名稱不能包含 / 或 \\');
+  if (profiles().includes(n)) return alert('已有同名使用者');
+  setProfiles([...profiles(), n]); PROF = n; S = DEF(); save(); push(); PROF = null; render();
+}
+function delUser() {
+  if (!confirm(`確定刪除使用者「${PROF}」以及所有學習紀錄？此動作無法復原。`)) return;
+  const n = PROF; setProfiles(profiles().filter(x => x !== n)); try { localStorage.removeItem(pkey(n)); } catch (e) {}
+  if (SYNC_ON) fsDel(n); PROF = null; render();
+}
+async function loadRemoteNames() { if (!SYNC_ON) return; try { const r = await fsList(); setProfiles([...profiles(), ...r]); if (!PROF) picker(); } catch (e) {} }
+const hue = n => [...n].reduce((a, c) => a * 31 + c.charCodeAt(0), 7) % 360;
+function picker() {
+  document.documentElement.dataset.theme = 'dark';
+  $('#nav').innerHTML = '';
+  $('#app').innerHTML = `<div style="min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center"><h1 style="font-size:30px;margin-bottom:28px">誰在學習？</h1>
+  <div class="row" style="justify-content:center;gap:22px">${profiles().map(n => `<div class="pf" onclick="pickUser(decodeURIComponent('${encodeURIComponent(n).replace(/'/g, '%27')}'))"><div class="av" style="--h:${hue(n)}">${esc([...n][0].toUpperCase())}</div><div>${esc(n)}</div></div>`).join('')}
+  <div class="pf" onclick="addUser()"><div class="av add"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div><div>新增使用者</div></div></div>
+  <div class="mute" style="margin-top:36px">${SYNC_ON ? '學習紀錄會同步到雲端，換裝置選同一個名字即可' : '提醒：尚未設定雲端同步，紀錄只存在這台裝置'}</div></div>`;
+}
 /* ---------- 遺忘曲線（固定階梯，單位：分鐘） ---------- */
 const STEPS = [20, 1440, 2880, 5760, 10080, 21600, 43200]; // 20分,1,2,4,7,15,30天
 const MIN = 60000;
@@ -121,6 +175,7 @@ const chOf = id => (D.novels[0].chapters.find(c => c.vocab.includes(id)) || {}).
 let view = 'home', cur = {ch: 0, mode: 'read', shuffle: []};
 function go(v, p) { view = v; Object.assign(cur, p || {}); render(); scrollTo(0, 0); }
 function render() {
+  if (!PROF) return picker();
   document.documentElement.dataset.theme = S.set.theme;
   document.documentElement.style.setProperty('--fs', S.set.fs + 'px');
   const tabs = [['home', 'book', '書架'], ['review', 'repeat', '複習'], ['nb', 'notebook', '生詞本'], ['stats', 'chart', '統計'], ['set', 'gear', '設定']];
@@ -130,7 +185,7 @@ function render() {
 /* ---------- 書架 ---------- */
 function home() {
   const n = D.novels[0], due = dueList().length, p = S.prog[n.id];
-  $('#app').innerHTML = `<h1>雅思小說閱讀</h1><div class="mute">在劇情裡自然記住單字</div>
+  $('#app').innerHTML = `<h1>雅思小說閱讀</h1><div class="mute">Hi, ${esc(PROF)} · 在劇情裡自然記住單字</div>
   <div class="card row" onclick="go('review')" style="cursor:pointer"><div><b style="font-size:28px;color:var(--acct)">${due}</b> <span>個單字今日待複習</span></div><div class="sp"></div><button class="btn sm">開始複習</button></div>
   <div class="card"><h2 style="margin-top:0">${esc(n.title)}</h2><div class="mute">${esc(n.desc)}</div>
   <div class="mute" style="margin:10px 0">共 ${n.chapters.length} 章 · ${Object.keys(D.words).length} 個單字 · 已加入生詞本 ${Object.keys(S.words).length}</div>
@@ -252,14 +307,15 @@ function stats() {
 }
 function set() {
   const s = S.set;
-  $('#app').innerHTML = `<h1>設定</h1><div class="card">
+  $('#app').innerHTML = `<h1>設定</h1><div class="card row"><div><b>${esc(PROF)}</b><div class="mute" id="sync">${syncText()}</div></div><div class="sp"></div><button class="btn sm ghost" onclick="switchUser()">切換使用者</button></div><div class="card">
   <p>發音：<select onchange="S.set.accent=this.value;save()"><option value="US" ${s.accent === 'US' ? 'selected' : ''}>美式</option><option value="UK" ${s.accent === 'UK' ? 'selected' : ''}>英式</option></select></p>
   <p>主題：<select onchange="S.set.theme=this.value;save();render()">${[['light', '淺色'], ['sepia', '米色護眼'], ['dark', '深色']].map(t => `<option value="${t[0]}" ${s.theme === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></p>
   <p>每日複習上限：<select onchange="S.set.limit=+this.value;save()">${[20, 50, 100, 200].map(n => `<option ${s.limit === n ? 'selected' : ''}>${n}</option>`).join('')}</select></p></div>
-  <div class="card"><div class="mute">學習紀錄目前存在這台裝置的瀏覽器中。可匯出備份，換裝置時匯入。</div><div class="row" style="margin-top:8px"><button class="btn sm" onclick="exp()">匯出備份</button><button class="btn sm ghost" onclick="imp()">匯入備份</button><button class="btn sm ghost" onclick="if(confirm('確定清除所有學習紀錄？')){S.words={};S.prog={};S.log=[];save();render()}">清除紀錄</button></div></div>`;
+  <div class="card"><div class="mute">可匯出備份檔作為額外保險。</div><div class="row" style="margin-top:8px"><button class="btn sm" onclick="exp()">匯出備份</button><button class="btn sm ghost" onclick="imp()">匯入備份</button><button class="btn sm ghost" onclick="if(confirm('確定清除所有學習紀錄？')){S.words={};S.prog={};S.log=[];save();render()}">清除紀錄</button><button class="btn sm ghost" onclick="delUser()">刪除此使用者</button></div></div>`;
 }
 function exp() { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(S)], {type: 'application/json'})); a.download = 'ielts-novel-backup.json'; a.click(); }
 function imp() { const i = document.createElement('input'); i.type = 'file'; i.accept = '.json'; i.onchange = () => i.files[0].text().then(t => { try { S = Object.assign(S, JSON.parse(t)); save(); render(); } catch (e) { alert('檔案格式不正確'); } }); i.click(); }
+loadRemoteNames();
 render();
 </script>
 </body>
